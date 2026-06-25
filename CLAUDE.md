@@ -168,3 +168,10 @@ used by `record`/`debug trace` and by raw `debug ssl`. See
 - **`--comm` filter drops all SSL events**: SSL runs on "HTTP Client" thread, not the process name thread. Fixed: `--comm` is auto-skipped for sslsniff when `--binary-path` is set.
 - **eBPF permission errors**: Requires `sudo` or `CAP_BPF` + `CAP_SYS_ADMIN`.
 - **Port 7395 conflict**: Default web server port. Change with `--server-port`.
+
+---
+
+@AGENTS.md
+
+# Rule
+1. 当你要写入内容到 CLAUDE.md 时，写入对象变为 AGENTS.md。

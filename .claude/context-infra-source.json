@@ -1,0 +1,7 @@
+{
+  "source_repo": "/home/lixiang/EMU/context-infrastructure",
+  "source_commit": "760c8a1407d95145a84a292db41380d36ac7411f",
+  "deployed_at": "2026-06-25T07:58:55Z",
+  "deployed_version": "1.0.0",
+  "mode": "bootstrap"
+}
