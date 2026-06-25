@@ -1,63 +1,45 @@
 {
   "session_info": {
-    "sessions": [],
-    "warning": "sessions table not found"
+    "schema_note": "no `sessions` table; metadata derived from timestamps",
+    "duration_s": 64.9,
+    "llm_calls": 6,
+    "process_nodes": 33,
+    "models": [
+      "deepseek-v4-flash",
+      "deepseek-v4-pro"
+    ]
   },
   "process_tree_stats": {
     "total_processes": 33,
     "depth_distribution": {
-      "0": 7,
+      "0": 1,
       "1": 9,
       "2": 16,
       "3": 1
     },
     "max_depth": 3,
-    "root_candidates": [
+    "agent_roots": [
       {
         "pid": 300859,
         "comm": "claude",
         "command": "/home/lixiang/.local/share/fnm/node-versions/v20.20.1/installation/bin/claude",
         "ppid": 300834
-      },
-      {
-        "pid": 301059,
-        "comm": "base64",
-        "command": "/usr/bin/base64",
-        "ppid": 301057
-      },
-      {
-        "pid": 301063,
-        "comm": "base64",
-        "command": "/usr/bin/base64",
-        "ppid": 301061
-      },
-      {
-        "pid": 301066,
-        "comm": "base64",
-        "command": "/usr/bin/base64",
-        "ppid": 301064
-      },
-      {
-        "pid": 301069,
-        "comm": "base64",
-        "command": "/usr/bin/base64",
-        "ppid": 301067
-      },
-      {
-        "pid": 301072,
-        "comm": "base64",
-        "command": "/usr/bin/base64",
-        "ppid": 301070
-      },
-      {
-        "pid": 301075,
-        "comm": "base64",
-        "command": "/usr/bin/base64",
-        "ppid": 301073
       }
     ],
-    "unreachable_pids": [],
-    "unreachable_count": 0
+    "agent_root_count": 1,
+    "missing_parent_orphans": {
+      "base64": 6
+    },
+    "missing_parent_orphan_count": 6,
+    "unreachable_pids": [
+      301059,
+      301063,
+      301066,
+      301069,
+      301072,
+      301075
+    ],
+    "unreachable_count": 6
   },
   "process_type_distribution": {
     "total": 33,
@@ -265,7 +247,14 @@
       "sh": {
         "0": 1
       }
-    }
+    },
+    "exited_count": 33,
+    "nonzero_exit_count": 3,
+    "nonzero_exits": {
+      "claude.exe=1": 1,
+      "grep=1": 2
+    },
+    "failure_rate_pct": 9.1
   },
   "llm_process_correlation": {
     "llm_calls": 6,
@@ -590,5 +579,38 @@
   "concurrency": {
     "max_concurrent": 5,
     "total_processes": 33
+  },
+  "event_timeline": {
+    "base_ms": 1782379606292,
+    "last_subprocess_exec_offset_ms": 20016,
+    "last_llm_call_offset_ms": 64414,
+    "last_tool_call_offset_ms": 25160,
+    "session_end_offset_ms": 64931,
+    "post_burst_tail_ms": 44915,
+    "in_process_io_actors": {
+      "Bun Pool 7": 8,
+      "git": 6,
+      "claude": 4,
+      "bash": 2,
+      "Bun Pool 12": 2,
+      "Bun Pool 6": 2,
+      "Bun Pool 14": 2,
+      "Bun Pool 0": 2,
+      "sh": 1
+    },
+    "file_writes_after_last_subprocess": 15
+  },
+  "subprocess_vs_inprocess": {
+    "num_process_clusters": 2,
+    "cluster_sizes": [
+      14,
+      19
+    ],
+    "total_tool_calls": 13,
+    "total_llm_calls": 6,
+    "tool_calls_after_last_cluster": 12,
+    "llm_calls_after_last_cluster": 4,
+    "subprocesses_after_last_cluster": 0,
+    "interpretation": "steady-state work is IN-PROCESS (tool/llm calls continue with no new subprocesses)"
   }
 }

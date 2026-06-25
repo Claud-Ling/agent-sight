@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
-"""AgentSight session analyzer — extracts 12 comparison dimensions from session.db.
+"""AgentSight session analyzer — extracts comparison dimensions from session.db.
 
 Usage: python3 analyze.py <session.db>
 
 Requires: Python 3.6+ (stdlib sqlite3 + json only)
-Schema: collector/src/sinks/sqlite.rs
+Schema: collector/src/sinks/sqlite.rs  (NOTE: there is no `sessions` table;
+        session metadata lives implicitly in llm_calls/process_nodes timestamps.)
 
 Dimensions:
-  1. session_info           — session-level metadata
-  2. process_tree_stats     — tree topology, depth distribution
+  1. session_info           — derived session span (no `sessions` table exists)
+  2. process_tree_stats     — tree topology, depth, root vs missing-parent orphans
   3. process_type_distribution — comm type counts
-  4. process_lifetime       — p50/p95/min/max
-  5. exit_status_distribution — exit_code by comm
-  6. llm_process_correlation — LLM↔process ±1s window correlation
+  4. process_lifetime       — p50/p95/min/max + lifetime-based INFRA/ACTION split
+  5. exit_status_distribution — exit_code by comm (incl. non-zero failures)
+  6. llm_process_correlation — LLM↔process ±1s window correlation (kept for ref)
   7. parent_child_pairs     — top parent→child pairs
   8. startup_vs_action       — Phase 1 (bootstrap) vs Phase 2 (action) separation
-  9. action_bursts           — post-LLM process creation bursts
+  9. action_bursts           — post-LLM process creation bursts (one-time?)
   10. token_flow             — input/output/cache token pattern
   11. tool_analysis          — tool type distribution and process mapping
   12. resource_profile       — CPU/RSS timeline
   13. network_targets        — outbound connections
   14. concurrency            — max simultaneous processes
+  15. event_timeline         — unified proc/llm/tool/in-process-IO timeline + key ratios
+  16. subprocess_vs_inprocess — does steady-state tool work spawn subprocesses?
 """
 
 import json
@@ -39,28 +42,42 @@ def load_db(path: str) -> sqlite3.Connection:
         sys.exit(1)
 
 
-# ── D1: Session info ────────────────────────────────────────────
+# ── D1: Session info (derived — no `sessions` table in schema) ───
 
 def session_info(db: sqlite3.Connection) -> dict:
-    try:
-        rows = db.execute(
-            "SELECT agent_type, model, total_tokens, start_timestamp_ms, end_timestamp_ms FROM sessions"
-        ).fetchall()
-    except sqlite3.OperationalError:
-        return {"sessions": [], "warning": "sessions table not found"}
+    """The SQLite schema has no `sessions` table. Derive session-level
+    metadata from llm_calls + process_nodes timestamp spans instead."""
+    def span(table, scol, ecol):
+        try:
+            r = db.execute(
+                f"SELECT MIN({scol}) AS s, MAX({ecol}) AS e FROM {table}"
+            ).fetchone()
+            return r["s"], r["e"]
+        except sqlite3.OperationalError:
+            return None, None
 
-    sessions = []
-    for r in rows:
-        sessions.append({
-            "agent_type": r["agent_type"],
-            "model": r["model"],
-            "total_tokens": r["total_tokens"],
-            "duration_s": (
-                round((r["end_timestamp_ms"] - r["start_timestamp_ms"]) / 1000.0, 1)
-                if r["end_timestamp_ms"] and r["start_timestamp_ms"] else None
-            ),
-        })
-    return {"sessions": sessions}
+    p_s, p_e = span("process_nodes", "start_timestamp_ms", "end_timestamp_ms")
+    l_s, l_e = span("llm_calls", "start_timestamp_ms", "end_timestamp_ms")
+
+    starts = [x for x in (p_s, l_s) if x is not None]
+    ends = [x for x in (p_e, l_e) if x is not None]
+    duration_s = None
+    if starts and ends:
+        duration_s = round((max(ends) - min(starts)) / 1000.0, 1)
+
+    models = db.execute(
+        "SELECT DISTINCT model FROM llm_calls WHERE model IS NOT NULL"
+    ).fetchall()
+    n_llm = db.execute("SELECT COUNT(*) FROM llm_calls").fetchone()[0]
+    n_proc = db.execute("SELECT COUNT(*) FROM process_nodes").fetchone()[0]
+
+    return {
+        "schema_note": "no `sessions` table; metadata derived from timestamps",
+        "duration_s": duration_s,
+        "llm_calls": n_llm,
+        "process_nodes": n_proc,
+        "models": [m["model"] for m in models],
+    }
 
 
 # ── D2: Process tree stats ──────────────────────────────────────
@@ -75,13 +92,32 @@ def process_tree_stats(db: sqlite3.Connection) -> dict:
 
     pids = {r["pid"] for r in rows}
 
+    # Classify every node whose ppid is not in the captured set.
+    #   - the agent root (comm == claude) has a genuinely external ppid (the
+    #     recorder / shell that launched it)
+    #   - everything else (e.g. base64) is a MISSING-PARENT orphan: its ppid
+    #     points at an unobserved intermediate that exited inside the eBPF
+    #     race window. These are NOT additional roots of the agent tree.
     root_candidates = []
+    missing_parent_orphans = []
     for r in rows:
         if r["ppid"] is None or r["ppid"] not in pids:
-            root_candidates.append({
+            entry = {
                 "pid": r["pid"], "comm": r["comm"],
                 "command": r["command"], "ppid": r["ppid"],
-            })
+            }
+            if r["comm"] == "claude":
+                root_candidates.append(entry)
+            else:
+                missing_parent_orphans.append(entry)
+
+    # Depth is computed from the agent root(s) only.
+    seed = root_candidates if root_candidates else (
+        # degenerate fallback: if no claude root captured, use all orphans
+        [{"pid": r["pid"], "comm": r["comm"], "command": r["command"],
+          "ppid": r["ppid"]} for r in rows
+         if r["ppid"] is None or r["ppid"] not in pids]
+    )
 
     parent_to_children = defaultdict(list)
     for r in rows:
@@ -89,10 +125,10 @@ def process_tree_stats(db: sqlite3.Connection) -> dict:
             parent_to_children[r["ppid"]].append(r["pid"])
 
     depths = {}
-    for rc in root_candidates:
+    for rc in seed:
         depths[rc["pid"]] = 0
 
-    queue = [rc["pid"] for rc in root_candidates]
+    queue = [rc["pid"] for rc in seed]
     visited = set(queue)
     while queue:
         pid = queue.pop(0)
@@ -105,11 +141,16 @@ def process_tree_stats(db: sqlite3.Connection) -> dict:
     depth_count = Counter(depths.values())
     unreachable = [pid for pid in pids if pid not in depths]
 
+    orphan_comms = Counter(o["comm"] for o in missing_parent_orphans)
+
     return {
         "total_processes": len(rows),
         "depth_distribution": dict(sorted(depth_count.items())),
         "max_depth": max(depths.values()) if depths else 0,
-        "root_candidates": root_candidates,
+        "agent_roots": root_candidates,
+        "agent_root_count": len(root_candidates),
+        "missing_parent_orphans": dict(orphan_comms),
+        "missing_parent_orphan_count": len(missing_parent_orphans),
         "unreachable_pids": unreachable,
         "unreachable_count": len(unreachable),
     }
@@ -172,9 +213,13 @@ def process_lifetime(db: sqlite3.Connection) -> dict:
     comm_stats = {}
     for comm, durs in sorted(by_comm.items()):
         sv = sorted(durs)
-        role = "INFRA" if comm in ("claude", "node") or (len(sv) > 0 and sv[len(sv)//2] > 1000) else "ACTION"
+        p50 = sv[len(sv)//2]
+        # Classify by MEASURED lifetime, not comm name. A process is INFRA
+        # only if it actually lives long (>1s). NOTE: claude.exe lives 1-7ms
+        # and is therefore ACTION, not INFRA — only `claude` itself is INFRA.
+        role = "INFRA" if p50 > 1000 else "ACTION"
         comm_stats[comm] = {
-            "count": len(sv), "p50_ms": sv[len(sv)//2],
+            "count": len(sv), "p50_ms": p50,
             "max_ms": max(sv), "role": role,
         }
 
@@ -194,11 +239,27 @@ def process_lifetime(db: sqlite3.Connection) -> dict:
 def exit_status_distribution(db: sqlite3.Connection) -> dict:
     rows = db.execute("SELECT comm, exit_code FROM process_nodes").fetchall()
     by_comm = defaultdict(lambda: defaultdict(int))
+    failures = Counter()
+    n_exited = 0
+    n_nonzero = 0
     for r in rows:
         comm = r["comm"] if r["comm"] else "unknown"
-        code = str(r["exit_code"]) if r["exit_code"] is not None else "still_running"
+        if r["exit_code"] is None:
+            code = "still_running"
+        else:
+            code = str(r["exit_code"])
+            n_exited += 1
+            if r["exit_code"] != 0:
+                n_nonzero += 1
+                failures[f"{comm}={r['exit_code']}"] += 1
         by_comm[comm][code] += 1
-    return {"by_comm": {comm: dict(codes) for comm, codes in sorted(by_comm.items())}}
+    return {
+        "by_comm": {comm: dict(codes) for comm, codes in sorted(by_comm.items())},
+        "exited_count": n_exited,
+        "nonzero_exit_count": n_nonzero,
+        "nonzero_exits": dict(failures),
+        "failure_rate_pct": round(n_nonzero / n_exited * 100, 1) if n_exited else None,
+    }
 
 
 # ── D6: LLM↔process correlation ─────────────────────────────────
@@ -543,6 +604,127 @@ def concurrency(db: sqlite3.Connection) -> dict:
     return {"max_concurrent": max_c, "total_processes": len(rows)}
 
 
+# ── D15: Unified event timeline ─────────────────────────────────
+
+def event_timeline(db: sqlite3.Connection) -> dict:
+    """Merge process-exec / llm-call / tool-call / in-process file-IO events
+    onto one timeline. Answers the core question: after the one-time process
+    burst stops, does the agent keep doing work (LLM calls, tool calls, file
+    writes) WITHOUT spawning new subprocesses?"""
+    base_row = db.execute(
+        "SELECT MIN(start_timestamp_ms) AS b FROM process_nodes"
+    ).fetchone()
+    if not base_row or base_row["b"] is None:
+        return {"warning": "no process timestamps"}
+    base = base_row["b"]
+
+    # last subprocess exec (process_nodes start is the exec moment)
+    last_proc = db.execute(
+        "SELECT MAX(start_timestamp_ms) AS m FROM process_nodes"
+    ).fetchone()["m"]
+
+    last_llm = db.execute(
+        "SELECT MAX(start_timestamp_ms) AS m FROM llm_calls"
+    ).fetchone()["m"]
+
+    last_tool = db.execute(
+        "SELECT MAX(start_timestamp_ms) AS m FROM tool_calls"
+    ).fetchone()
+    last_tool = last_tool["m"] if last_tool else None
+
+    # in-process IO actors: file audit events whose comm is the agent itself
+    # or a "Bun Pool N" worker thread (Claude Code = Bun runtime thread pool)
+    file_rows = db.execute(
+        "SELECT timestamp_ms, comm FROM audit_events WHERE audit_type='file' "
+        "ORDER BY timestamp_ms"
+    ).fetchall()
+    inproc_comms = Counter()
+    file_after_last_proc = 0
+    last_file = None
+    for r in file_rows:
+        comm = r["comm"] or "?"
+        inproc_comms[comm] += 1
+        last_file = r["timestamp_ms"]
+        if last_proc is not None and r["timestamp_ms"] > last_proc + 500:
+            file_after_last_proc += 1
+
+    session_end = max(x for x in (last_proc, last_llm, last_tool, last_file)
+                      if x is not None)
+
+    # "post-burst tail" = time the session keeps working after the last
+    # subprocess was spawned. If large, steady-state work is in-process.
+    post_burst_tail_ms = session_end - last_proc if last_proc else None
+
+    return {
+        "base_ms": base,
+        "last_subprocess_exec_offset_ms": (last_proc - base) if last_proc else None,
+        "last_llm_call_offset_ms": (last_llm - base) if last_llm else None,
+        "last_tool_call_offset_ms": (last_tool - base) if last_tool else None,
+        "session_end_offset_ms": session_end - base,
+        "post_burst_tail_ms": post_burst_tail_ms,
+        "in_process_io_actors": dict(inproc_comms.most_common()),
+        "file_writes_after_last_subprocess": file_after_last_proc,
+    }
+
+
+# ── D16: Subprocess vs in-process tool execution ────────────────
+
+def subprocess_vs_inprocess(db: sqlite3.Connection) -> dict:
+    """Test whether tool execution maps 1:1 to subprocess spawning, or whether
+    the bulk of tool calls execute in-process (no fork). Compares the count of
+    tool calls / LLM calls AFTER the process burst ends vs subprocesses spawned
+    after it."""
+    n_tools = db.execute("SELECT COUNT(*) FROM tool_calls").fetchone()[0]
+    n_llm = db.execute("SELECT COUNT(*) FROM llm_calls").fetchone()[0]
+
+    # The burst window: cluster process starts; the burst is the last cluster.
+    procs = db.execute(
+        "SELECT start_timestamp_ms FROM process_nodes "
+        "WHERE start_timestamp_ms IS NOT NULL ORDER BY start_timestamp_ms"
+    ).fetchall()
+    if not procs:
+        return {"warning": "no processes"}
+
+    starts = [p["start_timestamp_ms"] for p in procs]
+    # find clusters separated by >1s gaps
+    clusters = [[starts[0]]]
+    for s in starts[1:]:
+        if s - clusters[-1][-1] > 1000:
+            clusters.append([s])
+        else:
+            clusters[-1].append(s)
+    last_cluster_end = clusters[-1][-1]
+
+    # tool/llm calls strictly after the last subprocess cluster
+    tools_after = db.execute(
+        "SELECT COUNT(*) FROM tool_calls WHERE start_timestamp_ms > ?",
+        (last_cluster_end + 500,)
+    ).fetchone()[0]
+    llm_after = db.execute(
+        "SELECT COUNT(*) FROM llm_calls WHERE start_timestamp_ms > ?",
+        (last_cluster_end + 500,)
+    ).fetchone()[0]
+    procs_after = db.execute(
+        "SELECT COUNT(*) FROM process_nodes WHERE start_timestamp_ms > ?",
+        (last_cluster_end + 500,)
+    ).fetchone()[0]
+
+    return {
+        "num_process_clusters": len(clusters),
+        "cluster_sizes": [len(c) for c in clusters],
+        "total_tool_calls": n_tools,
+        "total_llm_calls": n_llm,
+        "tool_calls_after_last_cluster": tools_after,
+        "llm_calls_after_last_cluster": llm_after,
+        "subprocesses_after_last_cluster": procs_after,
+        "interpretation": (
+            "steady-state work is IN-PROCESS (tool/llm calls continue with no "
+            "new subprocesses)" if procs_after == 0 and (tools_after + llm_after) > 0
+            else "subprocesses continue past the burst"
+        ),
+    }
+
+
 # ── Main ─────────────────────────────────────────────────────────
 
 def main(db_path: str):
@@ -563,6 +745,8 @@ def main(db_path: str):
         "resource_profile": resource_profile(db),
         "network_targets": network_targets(db),
         "concurrency": concurrency(db),
+        "event_timeline": event_timeline(db),
+        "subprocess_vs_inprocess": subprocess_vs_inprocess(db),
     }
 
     print(json.dumps(result, ensure_ascii=False, indent=2))

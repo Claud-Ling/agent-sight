@@ -1,7 +1,13 @@
 {
   "session_info": {
-    "sessions": [],
-    "warning": "sessions table not found"
+    "schema_note": "no `sessions` table; metadata derived from timestamps",
+    "duration_s": 104.6,
+    "llm_calls": 5,
+    "process_nodes": 14,
+    "models": [
+      "deepseek-v4-flash",
+      "deepseek-v4-pro"
+    ]
   },
   "process_tree_stats": {
     "total_processes": 14,
@@ -12,7 +18,7 @@
       "3": 1
     },
     "max_depth": 3,
-    "root_candidates": [
+    "agent_roots": [
       {
         "pid": 301748,
         "comm": "claude",
@@ -20,6 +26,9 @@
         "ppid": 301723
       }
     ],
+    "agent_root_count": 1,
+    "missing_parent_orphans": {},
+    "missing_parent_orphan_count": 0,
     "unreachable_pids": [],
     "unreachable_count": 0
   },
@@ -124,7 +133,13 @@
       "sh": {
         "0": 1
       }
-    }
+    },
+    "exited_count": 14,
+    "nonzero_exit_count": 1,
+    "nonzero_exits": {
+      "claude.exe=1": 1
+    },
+    "failure_rate_pct": 7.1
   },
   "llm_process_correlation": {
     "llm_calls": 5,
@@ -393,5 +408,32 @@
   "concurrency": {
     "max_concurrent": 5,
     "total_processes": 14
+  },
+  "event_timeline": {
+    "base_ms": 1782379687603,
+    "last_subprocess_exec_offset_ms": 392,
+    "last_llm_call_offset_ms": 104045,
+    "last_tool_call_offset_ms": 98083,
+    "session_end_offset_ms": 104568,
+    "post_burst_tail_ms": 104176,
+    "in_process_io_actors": {
+      "git": 6,
+      "claude": 2,
+      "Bun Pool 14": 2,
+      "sh": 1
+    },
+    "file_writes_after_last_subprocess": 4
+  },
+  "subprocess_vs_inprocess": {
+    "num_process_clusters": 1,
+    "cluster_sizes": [
+      14
+    ],
+    "total_tool_calls": 3,
+    "total_llm_calls": 5,
+    "tool_calls_after_last_cluster": 3,
+    "llm_calls_after_last_cluster": 4,
+    "subprocesses_after_last_cluster": 0,
+    "interpretation": "steady-state work is IN-PROCESS (tool/llm calls continue with no new subprocesses)"
   }
 }
