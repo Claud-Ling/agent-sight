@@ -63,7 +63,45 @@
     "missing_start": 0,
     "missing_end": 0,
     "missing_both": 0,
-    "total_rows": 14
+    "total_rows": 14,
+    "by_comm": {
+      "claude": {
+        "count": 1,
+        "p50_ms": 104568,
+        "max_ms": 104568,
+        "role": "INFRA"
+      },
+      "claude.exe": {
+        "count": 3,
+        "p50_ms": 5,
+        "max_ms": 6,
+        "role": "ACTION"
+      },
+      "git": {
+        "count": 6,
+        "p50_ms": 3,
+        "max_ms": 15,
+        "role": "ACTION"
+      },
+      "grep": {
+        "count": 2,
+        "p50_ms": 21,
+        "max_ms": 21,
+        "role": "ACTION"
+      },
+      "ps": {
+        "count": 1,
+        "p50_ms": 21,
+        "max_ms": 21,
+        "role": "ACTION"
+      },
+      "sh": {
+        "count": 1,
+        "p50_ms": 23,
+        "max_ms": 23,
+        "role": "ACTION"
+      }
+    }
   },
   "exit_status_distribution": {
     "by_comm": {
@@ -154,5 +192,206 @@
         "count": 1
       }
     ]
+  },
+  "startup_vs_action": {
+    "first_llm_start_ms": 1782379687979,
+    "first_llm_end_ms": 1782379696008,
+    "first_llm_dur_ms": 8029,
+    "phase_startup": {
+      "count": 12,
+      "comms": {
+        "git": 6,
+        "grep": 2,
+        "claude": 1,
+        "claude.exe": 1,
+        "sh": 1,
+        "ps": 1
+      },
+      "timing": {
+        "first_ms": 1782379687603,
+        "last_ms": 1782379687963,
+        "span_ms": 360
+      }
+    },
+    "phase_llm_during": {
+      "count": 2,
+      "comms": {
+        "claude.exe": 2
+      },
+      "timing": {
+        "first_ms": 1782379687994,
+        "last_ms": 1782379687995,
+        "span_ms": 1
+      }
+    },
+    "phase_action": {
+      "count": 0,
+      "comms": {},
+      "timing": {
+        "first_ms": null,
+        "last_ms": null
+      }
+    }
+  },
+  "action_bursts": {
+    "bursts": [],
+    "total_action_procs": 0
+  },
+  "token_flow": {
+    "token_records": 5,
+    "models": {
+      "deepseek-v4-flash": 2,
+      "deepseek-v4-pro": 3
+    },
+    "total_input": 253827,
+    "total_output": 5342,
+    "output_ratio": 0.021,
+    "total_cache_create": 0,
+    "total_cache_read": 381824,
+    "cache_hit_rate": 100.0,
+    "per_call": [
+      {
+        "index": 0,
+        "model": "deepseek-v4-flash",
+        "input": 120509,
+        "output": 743,
+        "total": 121252,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 1,
+        "model": "deepseek-v4-flash",
+        "input": 120509,
+        "output": 123,
+        "total": 120632,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 2,
+        "model": "deepseek-v4-pro",
+        "input": 9068,
+        "output": 1006,
+        "total": 130650,
+        "cache_read": 120576,
+        "cache_create": 0
+      },
+      {
+        "index": 3,
+        "model": "deepseek-v4-pro",
+        "input": 228,
+        "output": 3352,
+        "total": 134140,
+        "cache_read": 130560,
+        "cache_create": 0
+      },
+      {
+        "index": 4,
+        "model": "deepseek-v4-pro",
+        "input": 3513,
+        "output": 118,
+        "total": 134319,
+        "cache_read": 130688,
+        "cache_create": 0
+      }
+    ]
+  },
+  "tool_analysis": {
+    "tool_calls": 3,
+    "unique_tools": 2,
+    "distribution": {
+      "Read": 2,
+      "Edit": 1
+    },
+    "statuses": {
+      "observed": 3
+    },
+    "with_related_pid": 3,
+    "without_related_pid": 0,
+    "tool_proc_pairs": {
+      "Read → claude": 2,
+      "Edit → claude": 1
+    },
+    "duration_by_tool": {}
+  },
+  "resource_profile": {
+    "samples": 53,
+    "comms": {
+      "claude": 53
+    },
+    "cpu": {
+      "p50": 1.51,
+      "max": 36.18
+    },
+    "rss": {
+      "first_mb": 138,
+      "last_mb": 317,
+      "max_mb": 317,
+      "delta_mb": 179
+    }
+  },
+  "network_targets": {
+    "targets": 7,
+    "categories": {
+      "llm_api": 6,
+      "mcp_registry": 4,
+      "telemetry": 4
+    },
+    "detail": [
+      {
+        "host": "api.deepseek.com",
+        "path": "/anthropic/v1/messages?beta=true",
+        "count": 5,
+        "error_count": 0,
+        "comm": "HTTP Client"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.box.mcp%2Fbox%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.mercury.mcp%2Fmercury%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=io.eraser%2Feraser%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/api/event_logging/v2/batch",
+        "count": 4,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.deepseek.com",
+        "path": "/anthropic/v1/messages/count_tokens?beta=true",
+        "count": 1,
+        "error_count": 0,
+        "comm": "HTTP Client"
+      }
+    ]
+  },
+  "concurrency": {
+    "max_concurrent": 5,
+    "total_processes": 14
   }
 }

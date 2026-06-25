@@ -135,7 +135,99 @@
     "missing_start": 0,
     "missing_end": 0,
     "missing_both": 0,
-    "total_rows": 36
+    "total_rows": 36,
+    "by_comm": {
+      "awk": {
+        "count": 1,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "base64": {
+        "count": 6,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "bash": {
+        "count": 1,
+        "p50_ms": 20,
+        "max_ms": 20,
+        "role": "ACTION"
+      },
+      "cat": {
+        "count": 2,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "claude": {
+        "count": 1,
+        "p50_ms": 78999,
+        "max_ms": 78999,
+        "role": "INFRA"
+      },
+      "claude.exe": {
+        "count": 3,
+        "p50_ms": 3,
+        "max_ms": 6,
+        "role": "ACTION"
+      },
+      "cut": {
+        "count": 1,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "env": {
+        "count": 1,
+        "p50_ms": 2,
+        "max_ms": 2,
+        "role": "ACTION"
+      },
+      "git": {
+        "count": 6,
+        "p50_ms": 3,
+        "max_ms": 14,
+        "role": "ACTION"
+      },
+      "grep": {
+        "count": 6,
+        "p50_ms": 1,
+        "max_ms": 21,
+        "role": "ACTION"
+      },
+      "head": {
+        "count": 3,
+        "p50_ms": 0,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "locale-check": {
+        "count": 1,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "ps": {
+        "count": 1,
+        "p50_ms": 21,
+        "max_ms": 21,
+        "role": "ACTION"
+      },
+      "sed": {
+        "count": 2,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "sh": {
+        "count": 1,
+        "p50_ms": 22,
+        "max_ms": 22,
+        "role": "ACTION"
+      }
+    }
   },
   "exit_status_distribution": {
     "by_comm": {
@@ -282,5 +374,249 @@
         "count": 1
       }
     ]
+  },
+  "startup_vs_action": {
+    "first_llm_start_ms": 1782379816162,
+    "first_llm_end_ms": 1782379825787,
+    "first_llm_dur_ms": 9625,
+    "phase_startup": {
+      "count": 12,
+      "comms": {
+        "git": 6,
+        "grep": 2,
+        "claude": 1,
+        "claude.exe": 1,
+        "sh": 1,
+        "ps": 1
+      },
+      "timing": {
+        "first_ms": 1782379815764,
+        "last_ms": 1782379816146,
+        "span_ms": 382
+      }
+    },
+    "phase_llm_during": {
+      "count": 2,
+      "comms": {
+        "claude.exe": 2
+      },
+      "timing": {
+        "first_ms": 1782379816182,
+        "last_ms": 1782379816183,
+        "span_ms": 1
+      }
+    },
+    "phase_action": {
+      "count": 22,
+      "comms": {
+        "base64": 6,
+        "grep": 4,
+        "head": 3,
+        "sed": 2,
+        "cat": 2,
+        "env": 1,
+        "bash": 1,
+        "locale-check": 1,
+        "cut": 1,
+        "awk": 1
+      },
+      "timing": {
+        "first_ms": 1782379831997,
+        "last_ms": 1782379832018,
+        "span_ms": 21
+      }
+    }
+  },
+  "action_bursts": {
+    "total_action_procs": 22,
+    "num_bursts": 1,
+    "bursts": [
+      {
+        "index": 0,
+        "count": 22,
+        "offset_from_first_llm_end_ms": 6210,
+        "span_ms": 21,
+        "comms": {
+          "base64": 6,
+          "grep": 4,
+          "head": 3,
+          "sed": 2,
+          "cat": 2,
+          "env": 1,
+          "bash": 1,
+          "locale-check": 1,
+          "cut": 1,
+          "awk": 1
+        }
+      }
+    ]
+  },
+  "token_flow": {
+    "token_records": 7,
+    "models": {
+      "deepseek-v4-flash": 2,
+      "deepseek-v4-pro": 5
+    },
+    "total_input": 245777,
+    "total_output": 4570,
+    "output_ratio": 0.019,
+    "total_cache_create": 0,
+    "total_cache_read": 616192,
+    "cache_hit_rate": 100.0,
+    "per_call": [
+      {
+        "index": 0,
+        "model": "deepseek-v4-flash",
+        "input": 120560,
+        "output": 969,
+        "total": 121529,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 1,
+        "model": "deepseek-v4-flash",
+        "input": 120560,
+        "output": 303,
+        "total": 120863,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 2,
+        "model": "deepseek-v4-pro",
+        "input": 1667,
+        "output": 700,
+        "total": 122815,
+        "cache_read": 120448,
+        "cache_create": 0
+      },
+      {
+        "index": 3,
+        "model": "deepseek-v4-pro",
+        "input": 825,
+        "output": 579,
+        "total": 123516,
+        "cache_read": 122112,
+        "cache_create": 0
+      },
+      {
+        "index": 4,
+        "model": "deepseek-v4-pro",
+        "input": 268,
+        "output": 480,
+        "total": 124140,
+        "cache_read": 123392,
+        "cache_create": 0
+      },
+      {
+        "index": 5,
+        "model": "deepseek-v4-pro",
+        "input": 1797,
+        "output": 447,
+        "total": 126276,
+        "cache_read": 124032,
+        "cache_create": 0
+      },
+      {
+        "index": 6,
+        "model": "deepseek-v4-pro",
+        "input": 100,
+        "output": 1092,
+        "total": 127400,
+        "cache_read": 126208,
+        "cache_create": 0
+      }
+    ]
+  },
+  "tool_analysis": {
+    "tool_calls": 16,
+    "unique_tools": 2,
+    "distribution": {
+      "Bash": 14,
+      "Read": 2
+    },
+    "statuses": {
+      "observed": 16
+    },
+    "with_related_pid": 16,
+    "without_related_pid": 0,
+    "tool_proc_pairs": {
+      "Bash → claude": 14,
+      "Read → claude": 2
+    },
+    "duration_by_tool": {}
+  },
+  "resource_profile": {
+    "samples": 40,
+    "comms": {
+      "claude": 40
+    },
+    "cpu": {
+      "p50": 2.49,
+      "max": 32.5
+    },
+    "rss": {
+      "first_mb": 157,
+      "last_mb": 321,
+      "max_mb": 321,
+      "delta_mb": 164
+    }
+  },
+  "network_targets": {
+    "targets": 6,
+    "categories": {
+      "llm_api": 7,
+      "mcp_registry": 4,
+      "telemetry": 6
+    },
+    "detail": [
+      {
+        "host": "api.deepseek.com",
+        "path": "/anthropic/v1/messages?beta=true",
+        "count": 7,
+        "error_count": 0,
+        "comm": "HTTP Client"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.box.mcp%2Fbox%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.mercury.mcp%2Fmercury%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=io.eraser%2Feraser%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/api/event_logging/v2/batch",
+        "count": 6,
+        "error_count": 0,
+        "comm": "claude"
+      }
+    ]
+  },
+  "concurrency": {
+    "max_concurrent": 5,
+    "total_processes": 36
   }
 }

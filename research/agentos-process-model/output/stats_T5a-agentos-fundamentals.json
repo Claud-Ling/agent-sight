@@ -143,7 +143,99 @@
     "missing_start": 0,
     "missing_end": 5,
     "missing_both": 0,
-    "total_rows": 46
+    "total_rows": 46,
+    "by_comm": {
+      "awk": {
+        "count": 1,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "base64": {
+        "count": 6,
+        "p50_ms": 0,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "bash": {
+        "count": 1,
+        "p50_ms": 19,
+        "max_ms": 19,
+        "role": "ACTION"
+      },
+      "cat": {
+        "count": 3,
+        "p50_ms": 0,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "claude": {
+        "count": 1,
+        "p50_ms": 123760,
+        "max_ms": 123760,
+        "role": "INFRA"
+      },
+      "claude.exe": {
+        "count": 2,
+        "p50_ms": 6,
+        "max_ms": 6,
+        "role": "ACTION"
+      },
+      "cut": {
+        "count": 1,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "env": {
+        "count": 1,
+        "p50_ms": 2,
+        "max_ms": 2,
+        "role": "ACTION"
+      },
+      "git": {
+        "count": 13,
+        "p50_ms": 5,
+        "max_ms": 1012,
+        "role": "ACTION"
+      },
+      "git-remote-http": {
+        "count": 1,
+        "p50_ms": 992,
+        "max_ms": 992,
+        "role": "ACTION"
+      },
+      "grep": {
+        "count": 4,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "head": {
+        "count": 3,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "locale-check": {
+        "count": 1,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "sed": {
+        "count": 2,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "ssh": {
+        "count": 1,
+        "p50_ms": 3001,
+        "max_ms": 3001,
+        "role": "INFRA"
+      }
+    }
   },
   "exit_status_distribution": {
     "by_comm": {
@@ -298,5 +390,279 @@
         "count": 1
       }
     ]
+  },
+  "startup_vs_action": {
+    "first_llm_start_ms": 1782379933606,
+    "first_llm_end_ms": 1782379940214,
+    "first_llm_dur_ms": 6608,
+    "phase_startup": {
+      "count": 7,
+      "comms": {
+        "git": 4,
+        "claude": 1,
+        "claude.exe": 1,
+        "sh": 1
+      },
+      "timing": {
+        "first_ms": 1782379933237,
+        "last_ms": 1782379933588,
+        "span_ms": 351
+      }
+    },
+    "phase_llm_during": {
+      "count": 12,
+      "comms": {
+        "git": 5,
+        "grep": 2,
+        "claude.exe": 2,
+        "ps": 1,
+        "ssh": 1,
+        "git-remote-http": 1
+      },
+      "timing": {
+        "first_ms": 1782379933607,
+        "last_ms": 1782379939528,
+        "span_ms": 5921
+      }
+    },
+    "phase_action": {
+      "count": 27,
+      "comms": {
+        "base64": 6,
+        "git": 4,
+        "grep": 4,
+        "head": 3,
+        "cat": 3,
+        "sed": 2,
+        "env": 1,
+        "bash": 1,
+        "locale-check": 1,
+        "cut": 1,
+        "awk": 1
+      },
+      "timing": {
+        "first_ms": 1782379940502,
+        "last_ms": 1782379953470,
+        "span_ms": 12968
+      }
+    }
+  },
+  "action_bursts": {
+    "total_action_procs": 27,
+    "num_bursts": 2,
+    "bursts": [
+      {
+        "index": 0,
+        "count": 4,
+        "offset_from_first_llm_end_ms": 288,
+        "span_ms": 24,
+        "comms": {
+          "git": 4
+        }
+      },
+      {
+        "index": 1,
+        "count": 23,
+        "offset_from_first_llm_end_ms": 13236,
+        "span_ms": 20,
+        "comms": {
+          "base64": 6,
+          "grep": 4,
+          "head": 3,
+          "cat": 3,
+          "sed": 2,
+          "env": 1,
+          "bash": 1,
+          "locale-check": 1,
+          "cut": 1,
+          "awk": 1
+        }
+      }
+    ]
+  },
+  "token_flow": {
+    "token_records": 7,
+    "models": {
+      "deepseek-v4-flash": 4,
+      "deepseek-v4-pro": 3
+    },
+    "total_input": 177544,
+    "total_output": 6538,
+    "output_ratio": 0.037,
+    "total_cache_create": 0,
+    "total_cache_read": 273536,
+    "cache_hit_rate": 100.0,
+    "per_call": [
+      {
+        "index": 0,
+        "model": "deepseek-v4-flash",
+        "input": 435,
+        "output": 523,
+        "total": 958,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 1,
+        "model": "deepseek-v4-pro",
+        "input": 120594,
+        "output": 263,
+        "total": 120857,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 2,
+        "model": "deepseek-v4-flash",
+        "input": 14233,
+        "output": 438,
+        "total": 14671,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 3,
+        "model": "deepseek-v4-flash",
+        "input": 565,
+        "output": 437,
+        "total": 15594,
+        "cache_read": 14592,
+        "cache_create": 0
+      },
+      {
+        "index": 4,
+        "model": "deepseek-v4-flash",
+        "input": 29247,
+        "output": 1636,
+        "total": 46371,
+        "cache_read": 15488,
+        "cache_create": 0
+      },
+      {
+        "index": 5,
+        "model": "deepseek-v4-pro",
+        "input": 1628,
+        "output": 198,
+        "total": 122658,
+        "cache_read": 120832,
+        "cache_create": 0
+      },
+      {
+        "index": 6,
+        "model": "deepseek-v4-pro",
+        "input": 10842,
+        "output": 3043,
+        "total": 136509,
+        "cache_read": 122624,
+        "cache_create": 0
+      }
+    ]
+  },
+  "tool_analysis": {
+    "tool_calls": 14,
+    "unique_tools": 3,
+    "distribution": {
+      "Read": 10,
+      "Bash": 3,
+      "Agent": 1
+    },
+    "statuses": {
+      "observed": 14
+    },
+    "with_related_pid": 14,
+    "without_related_pid": 0,
+    "tool_proc_pairs": {
+      "Read → claude": 10,
+      "Bash → claude": 3,
+      "Agent → claude": 1
+    },
+    "duration_by_tool": {}
+  },
+  "resource_profile": {
+    "samples": 62,
+    "comms": {
+      "claude": 62
+    },
+    "cpu": {
+      "p50": 1.5,
+      "max": 21.61
+    },
+    "rss": {
+      "first_mb": 340,
+      "last_mb": 338,
+      "max_mb": 340,
+      "delta_mb": -2
+    }
+  },
+  "network_targets": {
+    "targets": 8,
+    "categories": {
+      "llm_api": 8,
+      "mcp_registry": 4,
+      "plugins": 2,
+      "telemetry": 4
+    },
+    "detail": [
+      {
+        "host": "api.deepseek.com",
+        "path": "/anthropic/v1/messages?beta=true",
+        "count": 7,
+        "error_count": 0,
+        "comm": "HTTP Client"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.box.mcp%2Fbox%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.mercury.mcp%2Fmercury%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=io.eraser%2Feraser%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "downloads.claude.ai",
+        "path": "/claude-code-releases/plugins/claude-plugins-official/latest",
+        "count": 2,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/api/event_logging/v2/batch",
+        "count": 4,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.deepseek.com",
+        "path": "/anthropic/v1/messages/count_tokens?beta=true",
+        "count": 1,
+        "error_count": 0,
+        "comm": "HTTP Client"
+      }
+    ]
+  },
+  "concurrency": {
+    "max_concurrent": 6,
+    "total_processes": 46
   }
 }

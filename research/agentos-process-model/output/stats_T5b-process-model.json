@@ -135,7 +135,99 @@
     "missing_start": 0,
     "missing_end": 0,
     "missing_both": 0,
-    "total_rows": 37
+    "total_rows": 37,
+    "by_comm": {
+      "awk": {
+        "count": 1,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "base64": {
+        "count": 6,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "bash": {
+        "count": 1,
+        "p50_ms": 21,
+        "max_ms": 21,
+        "role": "ACTION"
+      },
+      "cat": {
+        "count": 3,
+        "p50_ms": 0,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "claude": {
+        "count": 1,
+        "p50_ms": 169611,
+        "max_ms": 169611,
+        "role": "INFRA"
+      },
+      "claude.exe": {
+        "count": 3,
+        "p50_ms": 5,
+        "max_ms": 7,
+        "role": "ACTION"
+      },
+      "cut": {
+        "count": 1,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "env": {
+        "count": 1,
+        "p50_ms": 2,
+        "max_ms": 2,
+        "role": "ACTION"
+      },
+      "git": {
+        "count": 6,
+        "p50_ms": 3,
+        "max_ms": 15,
+        "role": "ACTION"
+      },
+      "grep": {
+        "count": 6,
+        "p50_ms": 1,
+        "max_ms": 23,
+        "role": "ACTION"
+      },
+      "head": {
+        "count": 3,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "locale-check": {
+        "count": 1,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "ps": {
+        "count": 1,
+        "p50_ms": 24,
+        "max_ms": 24,
+        "role": "ACTION"
+      },
+      "sed": {
+        "count": 2,
+        "p50_ms": 0,
+        "max_ms": 0,
+        "role": "ACTION"
+      },
+      "sh": {
+        "count": 1,
+        "p50_ms": 25,
+        "max_ms": 25,
+        "role": "ACTION"
+      }
+    }
   },
   "exit_status_distribution": {
     "by_comm": {
@@ -342,5 +434,345 @@
         "count": 1
       }
     ]
+  },
+  "startup_vs_action": {
+    "first_llm_start_ms": 1782380072636,
+    "first_llm_end_ms": 1782380079832,
+    "first_llm_dur_ms": 7196,
+    "phase_startup": {
+      "count": 12,
+      "comms": {
+        "git": 6,
+        "grep": 2,
+        "claude": 1,
+        "claude.exe": 1,
+        "sh": 1,
+        "ps": 1
+      },
+      "timing": {
+        "first_ms": 1782380072239,
+        "last_ms": 1782380072620,
+        "span_ms": 381
+      }
+    },
+    "phase_llm_during": {
+      "count": 2,
+      "comms": {
+        "claude.exe": 2
+      },
+      "timing": {
+        "first_ms": 1782380072651,
+        "last_ms": 1782380072652,
+        "span_ms": 1
+      }
+    },
+    "phase_action": {
+      "count": 23,
+      "comms": {
+        "base64": 6,
+        "grep": 4,
+        "head": 3,
+        "cat": 3,
+        "sed": 2,
+        "env": 1,
+        "bash": 1,
+        "locale-check": 1,
+        "cut": 1,
+        "awk": 1
+      },
+      "timing": {
+        "first_ms": 1782380089282,
+        "last_ms": 1782380089306,
+        "span_ms": 24
+      }
+    }
+  },
+  "action_bursts": {
+    "total_action_procs": 23,
+    "num_bursts": 1,
+    "bursts": [
+      {
+        "index": 0,
+        "count": 23,
+        "offset_from_first_llm_end_ms": 9450,
+        "span_ms": 24,
+        "comms": {
+          "base64": 6,
+          "grep": 4,
+          "head": 3,
+          "cat": 3,
+          "sed": 2,
+          "env": 1,
+          "bash": 1,
+          "locale-check": 1,
+          "cut": 1,
+          "awk": 1
+        }
+      }
+    ]
+  },
+  "token_flow": {
+    "token_records": 17,
+    "models": {
+      "deepseek-v4-flash": 1,
+      "deepseek-v4-pro": 16
+    },
+    "total_input": 131012,
+    "total_output": 9353,
+    "output_ratio": 0.071,
+    "total_cache_create": 0,
+    "total_cache_read": 1895040,
+    "cache_hit_rate": 100.0,
+    "per_call": [
+      {
+        "index": 0,
+        "model": "deepseek-v4-flash",
+        "input": 485,
+        "output": 695,
+        "total": 1180,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 1,
+        "model": "deepseek-v4-pro",
+        "input": 120691,
+        "output": 317,
+        "total": 121008,
+        "cache_read": 0,
+        "cache_create": 0
+      },
+      {
+        "index": 2,
+        "model": "deepseek-v4-pro",
+        "input": 848,
+        "output": 145,
+        "total": 121953,
+        "cache_read": 120960,
+        "cache_create": 0
+      },
+      {
+        "index": 3,
+        "model": "deepseek-v4-pro",
+        "input": 414,
+        "output": 272,
+        "total": 122542,
+        "cache_read": 121856,
+        "cache_create": 0
+      },
+      {
+        "index": 4,
+        "model": "deepseek-v4-pro",
+        "input": 371,
+        "output": 116,
+        "total": 122727,
+        "cache_read": 122240,
+        "cache_create": 0
+      },
+      {
+        "index": 5,
+        "model": "deepseek-v4-pro",
+        "input": 119,
+        "output": 184,
+        "total": 122927,
+        "cache_read": 122624,
+        "cache_create": 0
+      },
+      {
+        "index": 6,
+        "model": "deepseek-v4-pro",
+        "input": 875,
+        "output": 210,
+        "total": 123709,
+        "cache_read": 122624,
+        "cache_create": 0
+      },
+      {
+        "index": 7,
+        "model": "deepseek-v4-pro",
+        "input": 564,
+        "output": 362,
+        "total": 124574,
+        "cache_read": 123648,
+        "cache_create": 0
+      },
+      {
+        "index": 8,
+        "model": "deepseek-v4-pro",
+        "input": 46,
+        "output": 205,
+        "total": 124795,
+        "cache_read": 124544,
+        "cache_create": 0
+      },
+      {
+        "index": 9,
+        "model": "deepseek-v4-pro",
+        "input": 260,
+        "output": 1688,
+        "total": 126620,
+        "cache_read": 124672,
+        "cache_create": 0
+      },
+      {
+        "index": 10,
+        "model": "deepseek-v4-pro",
+        "input": 81,
+        "output": 1466,
+        "total": 128139,
+        "cache_read": 126592,
+        "cache_create": 0
+      },
+      {
+        "index": 11,
+        "model": "deepseek-v4-pro",
+        "input": 1570,
+        "output": 1304,
+        "total": 129466,
+        "cache_read": 126592,
+        "cache_create": 0
+      },
+      {
+        "index": 12,
+        "model": "deepseek-v4-pro",
+        "input": 111,
+        "output": 399,
+        "total": 129918,
+        "cache_read": 129408,
+        "cache_create": 0
+      },
+      {
+        "index": 13,
+        "model": "deepseek-v4-pro",
+        "input": 2968,
+        "output": 337,
+        "total": 133097,
+        "cache_read": 129792,
+        "cache_create": 0
+      },
+      {
+        "index": 14,
+        "model": "deepseek-v4-pro",
+        "input": 219,
+        "output": 244,
+        "total": 133455,
+        "cache_read": 132992,
+        "cache_create": 0
+      },
+      {
+        "index": 15,
+        "model": "deepseek-v4-pro",
+        "input": 351,
+        "output": 891,
+        "total": 134362,
+        "cache_read": 133120,
+        "cache_create": 0
+      },
+      {
+        "index": 16,
+        "model": "deepseek-v4-pro",
+        "input": 1039,
+        "output": 518,
+        "total": 134933,
+        "cache_read": 133376,
+        "cache_create": 0
+      }
+    ]
+  },
+  "tool_analysis": {
+    "tool_calls": 18,
+    "unique_tools": 5,
+    "distribution": {
+      "Bash": 11,
+      "Write": 3,
+      "Read": 2,
+      "Grep": 1,
+      "Skill": 1
+    },
+    "statuses": {
+      "observed": 18
+    },
+    "with_related_pid": 18,
+    "without_related_pid": 0,
+    "tool_proc_pairs": {
+      "Bash → claude": 11,
+      "Write → claude": 3,
+      "Read → claude": 2,
+      "Grep → claude": 1,
+      "Skill → claude": 1
+    },
+    "duration_by_tool": {}
+  },
+  "resource_profile": {
+    "samples": 85,
+    "comms": {
+      "claude": 85
+    },
+    "cpu": {
+      "p50": 1.51,
+      "max": 41.0
+    },
+    "rss": {
+      "first_mb": 115,
+      "last_mb": 330,
+      "max_mb": 330,
+      "delta_mb": 215
+    }
+  },
+  "network_targets": {
+    "targets": 6,
+    "categories": {
+      "llm_api": 17,
+      "mcp_registry": 4,
+      "telemetry": 11
+    },
+    "detail": [
+      {
+        "host": "api.deepseek.com",
+        "path": "/anthropic/v1/messages?beta=true",
+        "count": 17,
+        "error_count": 0,
+        "comm": "HTTP Client"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.box.mcp%2Fbox%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=com.mercury.mcp%2Fmercury%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/mcp-registry/v0/servers?version=latest&limit=100&visibility=commercial%2Cgsuite%2Centerprise%2Chealth&cursor=io.eraser%2Feraser%3A1.0.0",
+        "count": 1,
+        "error_count": 0,
+        "comm": "claude"
+      },
+      {
+        "host": "api.anthropic.com",
+        "path": "/api/event_logging/v2/batch",
+        "count": 11,
+        "error_count": 0,
+        "comm": "claude"
+      }
+    ]
+  },
+  "concurrency": {
+    "max_concurrent": 5,
+    "total_processes": 37
   }
 }
