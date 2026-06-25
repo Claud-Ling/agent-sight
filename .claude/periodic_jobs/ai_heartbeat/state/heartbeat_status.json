@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "observer": {
+    "last_success_at": "2026-06-25T05:44:41.515402+00:00",
+    "last_attempt_at": "2026-06-25T05:44:41.515402+00:00",
+    "last_status": "success",
+    "last_target_date": "2026-06-25",
+    "last_error": null,
+    "last_prompted_on": "2026-06-25"
+  },
+  "reflector": {
+    "last_success_at": "2026-06-23T06:11:29.586030+00:00",
+    "last_attempt_at": "2026-06-23T06:11:29.586030+00:00",
+    "last_status": "success",
+    "last_target_date": "2026-06-23",
+    "last_error": null,
+    "last_prompted_on": "2026-06-23"
+  }
+}

@@ -38,3 +38,10 @@ grep -A 20 "Date: $(date -v-7d +%Y-%m-%d)" .claude/memory/OBSERVATIONS.md
 
 <!-- 以下是记录区域，由 observer 追加，reflector 定期整理 -->
 
+Date: 2026-06-25
+
+🔴 High: [方法论] AgentSight 实验完成——7 个 session 录制了 Claude Code v2.1.191 的进程行为。核心发现：进程树深度恒定 3 层、p50 存活 1-7ms、bash 是应被调度器透明化的通道节点、采用请求驱动（per-request fork）而非连接池生命周期模型。实验设计/计划/脚本/报告在 research/agentos-process-model/。
+🟡 Medium: [工具链] AgentSight 编译需要 Rust 1.96+（edition2024）、libbpf 子模块初始化。sudo NOPASSWD 只配了 agentsight 二进制路径（/etc/sudoers.d/agentsight）。非交互式录制 `record -- claude -p` 可用，T5 交互式多轮需 `record -c claude` 附着但本次因环境限制用了回退方案。
+🟡 Medium: [维护] collector/vendor/ 已加入 .git/info/exclude 防止构建变更污染 git。AGENTS.md 从 symlink 改为独立文件（deploy-context 部署）。
+🟢 Low: [环境] Rust 1.75→1.96、git submodule update、make build 全量通过。
+
