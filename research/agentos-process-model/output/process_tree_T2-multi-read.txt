@@ -1,0 +1,37 @@
+# Process Tree: T2-multi-read
+# Root processes: 7
+# Total processes in tree: 16
+
+├── 300859:claude
+│   ├── 300889:git
+│   │   ├── 300892:git
+│   │   │   └── 300894:git
+│   │   └── 300895:git
+│   ├── 300890:git
+│   ├── 300891:git
+│   ├── 300899:claude.exe
+│   ├── 300914:sh
+│   │   ├── 300915:ps
+│   │   ├── 300916:grep
+│   │   └── 300917:grep
+│   ├── 300918:claude.exe
+│   ├── 300919:claude.exe
+│   ├── 301046:env
+│   └── 301047:bash
+│       ├── 301048:locale-check
+│       ├── 301050:grep
+│       ├── 301052:grep
+│       ├── 301054:cut
+│       ├── 301055:grep
+│       ├── 301077:head
+│       ├── 301079:grep
+│       ├── 301080:awk
+│       ├── 301081:head
+│       ├── 301083:sed
+│       └── 301084:sed
+├── 301059:base64
+├── 301063:base64
+├── 301066:base64
+├── 301069:base64
+├── 301072:base64
+└── 301075:base64

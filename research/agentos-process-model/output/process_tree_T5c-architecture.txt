@@ -1,0 +1,41 @@
+# Process Tree: T5c-architecture
+# Root processes: 7
+# Total processes in tree: 16
+
+├── 306820:claude
+│   ├── 306840:git
+│   │   ├── 306842:git
+│   │   │   └── 306847:git
+│   │   └── 306848:git
+│   ├── 306841:git
+│   ├── 306843:git
+│   ├── 306851:claude.exe
+│   ├── 306865:sh
+│   │   ├── 306866:ps
+│   │   ├── 306867:grep
+│   │   └── 306868:grep
+│   ├── 306869:claude.exe
+│   ├── 306870:claude.exe
+│   ├── 306992:env
+│   └── 306993:bash
+│       ├── 306994:locale-check
+│       ├── 306996:grep
+│       ├── 306998:grep
+│       ├── 307000:cut
+│       ├── 307001:grep
+│       ├── 307022:head
+│       ├── 307024:grep
+│       ├── 307025:awk
+│       ├── 307026:head
+│       ├── 307028:sed
+│       ├── 307029:sed
+│       ├── 307030:head
+│       ├── 307031:cat
+│       ├── 307032:cat
+│       └── 307033:cat
+├── 307005:base64
+├── 307008:base64
+├── 307011:base64
+├── 307014:base64
+├── 307017:base64
+└── 307020:base64

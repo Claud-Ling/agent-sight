@@ -1,0 +1,32 @@
+digraph process_tree {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname=monospace];
+  edge [fontname=monospace, fontsize=10];
+  301748 [label="301748\nclaude" fillcolor="#4A90D9" style="filled,rounded" fontcolor="white"];
+  301769 [label="301769\ngit" fillcolor="#F44747" style="filled,rounded" fontcolor="white"];
+  301772 [label="301772\ngit" fillcolor="#F44747" style="filled,rounded" fontcolor="white"];
+  301777 [label="301777\ngit" fillcolor="#F44747" style="filled,rounded" fontcolor="white"];
+  301772 -> 301777;
+  301769 -> 301772;
+  301778 [label="301778\ngit" fillcolor="#F44747" style="filled,rounded" fontcolor="white"];
+  301769 -> 301778;
+  301748 -> 301769;
+  301770 [label="301770\ngit" fillcolor="#F44747" style="filled,rounded" fontcolor="white"];
+  301748 -> 301770;
+  301771 [label="301771\ngit" fillcolor="#F44747" style="filled,rounded" fontcolor="white"];
+  301748 -> 301771;
+  301781 [label="301781\nclaude.exe" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  301748 -> 301781;
+  301795 [label="301795\nsh" fillcolor="#E5C07B" style="filled,rounded" fontcolor="white"];
+  301796 [label="301796\nps" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  301795 -> 301796;
+  301797 [label="301797\ngrep" fillcolor="#98C379" style="filled,rounded" fontcolor="white"];
+  301795 -> 301797;
+  301798 [label="301798\ngrep" fillcolor="#98C379" style="filled,rounded" fontcolor="white"];
+  301795 -> 301798;
+  301748 -> 301795;
+  301799 [label="301799\nclaude.exe" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  301748 -> 301799;
+  301800 [label="301800\nclaude.exe" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  301748 -> 301800;
+}

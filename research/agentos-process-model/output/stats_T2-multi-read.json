@@ -1,0 +1,273 @@
+{
+  "session_info": {
+    "sessions": [],
+    "warning": "sessions table not found"
+  },
+  "process_tree_stats": {
+    "total_processes": 33,
+    "depth_distribution": {
+      "0": 7,
+      "1": 9,
+      "2": 16,
+      "3": 1
+    },
+    "max_depth": 3,
+    "root_candidates": [
+      {
+        "pid": 300859,
+        "comm": "claude",
+        "command": "/home/lixiang/.local/share/fnm/node-versions/v20.20.1/installation/bin/claude",
+        "ppid": 300834
+      },
+      {
+        "pid": 301059,
+        "comm": "base64",
+        "command": "/usr/bin/base64",
+        "ppid": 301057
+      },
+      {
+        "pid": 301063,
+        "comm": "base64",
+        "command": "/usr/bin/base64",
+        "ppid": 301061
+      },
+      {
+        "pid": 301066,
+        "comm": "base64",
+        "command": "/usr/bin/base64",
+        "ppid": 301064
+      },
+      {
+        "pid": 301069,
+        "comm": "base64",
+        "command": "/usr/bin/base64",
+        "ppid": 301067
+      },
+      {
+        "pid": 301072,
+        "comm": "base64",
+        "command": "/usr/bin/base64",
+        "ppid": 301070
+      },
+      {
+        "pid": 301075,
+        "comm": "base64",
+        "command": "/usr/bin/base64",
+        "ppid": 301073
+      }
+    ],
+    "unreachable_pids": [],
+    "unreachable_count": 0
+  },
+  "process_type_distribution": {
+    "total": 33,
+    "unique_types": 14,
+    "distribution": {
+      "git": {
+        "count": 6,
+        "pct": 18.2
+      },
+      "grep": {
+        "count": 6,
+        "pct": 18.2
+      },
+      "base64": {
+        "count": 6,
+        "pct": 18.2
+      },
+      "claude.exe": {
+        "count": 3,
+        "pct": 9.1
+      },
+      "head": {
+        "count": 2,
+        "pct": 6.1
+      },
+      "sed": {
+        "count": 2,
+        "pct": 6.1
+      },
+      "claude": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "sh": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "ps": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "env": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "bash": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "locale-check": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "cut": {
+        "count": 1,
+        "pct": 3.0
+      },
+      "awk": {
+        "count": 1,
+        "pct": 3.0
+      }
+    }
+  },
+  "process_lifetime": {
+    "computable": 33,
+    "min_ms": 0,
+    "max_ms": 64931,
+    "mean_ms": 1972.4,
+    "p50_ms": 1,
+    "p95_ms": 22,
+    "missing_start": 0,
+    "missing_end": 0,
+    "missing_both": 0,
+    "total_rows": 33
+  },
+  "exit_status_distribution": {
+    "by_comm": {
+      "awk": {
+        "0": 1
+      },
+      "base64": {
+        "0": 6
+      },
+      "bash": {
+        "0": 1
+      },
+      "claude": {
+        "0": 1
+      },
+      "claude.exe": {
+        "0": 2,
+        "1": 1
+      },
+      "cut": {
+        "0": 1
+      },
+      "env": {
+        "0": 1
+      },
+      "git": {
+        "0": 6
+      },
+      "grep": {
+        "0": 4,
+        "1": 2
+      },
+      "head": {
+        "0": 2
+      },
+      "locale-check": {
+        "0": 1
+      },
+      "ps": {
+        "0": 1
+      },
+      "sed": {
+        "0": 2
+      },
+      "sh": {
+        "0": 1
+      }
+    }
+  },
+  "llm_process_correlation": {
+    "llm_calls": 6,
+    "null_end_fallback_count": 0,
+    "total_associated_processes": 14,
+    "avg_processes_per_call": 2.3,
+    "per_call_detail": [
+      {
+        "llm_call_id": "llm-canon-event-1782379606663-http-parser-300859-415",
+        "window_start_ms": 1782379605663,
+        "window_end_ms": 1782379611351,
+        "processes_in_window": 14
+      },
+      {
+        "llm_call_id": "llm-orphan-canon-event-1782379624668-sse-processor-300859-894",
+        "window_start_ms": 1782379623668,
+        "window_end_ms": 1782379625668,
+        "processes_in_window": 0
+      },
+      {
+        "llm_call_id": "llm-orphan-canon-event-1782379627713-sse-processor-300859-1957",
+        "window_start_ms": 1782379626713,
+        "window_end_ms": 1782379628713,
+        "processes_in_window": 0
+      },
+      {
+        "llm_call_id": "llm-orphan-canon-event-1782379631452-sse-processor-300859-2335",
+        "window_start_ms": 1782379630452,
+        "window_end_ms": 1782379632452,
+        "processes_in_window": 0
+      },
+      {
+        "llm_call_id": "llm-orphan-canon-event-1782379648384-sse-processor-300859-3409",
+        "window_start_ms": 1782379647384,
+        "window_end_ms": 1782379649384,
+        "processes_in_window": 0
+      },
+      {
+        "llm_call_id": "llm-orphan-canon-event-1782379670706-sse-processor-300859-4161",
+        "window_start_ms": 1782379669706,
+        "window_end_ms": 1782379671706,
+        "processes_in_window": 0
+      }
+    ]
+  },
+  "parent_child_pairs": {
+    "total_pairs": 26,
+    "top_10": [
+      {
+        "pair": "bash → grep",
+        "count": 4
+      },
+      {
+        "pair": "claude → git",
+        "count": 3
+      },
+      {
+        "pair": "git → git",
+        "count": 3
+      },
+      {
+        "pair": "claude → claude.exe",
+        "count": 3
+      },
+      {
+        "pair": "sh → grep",
+        "count": 2
+      },
+      {
+        "pair": "bash → head",
+        "count": 2
+      },
+      {
+        "pair": "bash → sed",
+        "count": 2
+      },
+      {
+        "pair": "claude → sh",
+        "count": 1
+      },
+      {
+        "pair": "sh → ps",
+        "count": 1
+      },
+      {
+        "pair": "claude → env",
+        "count": 1
+      }
+    ]
+  }
+}

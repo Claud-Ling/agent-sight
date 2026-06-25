@@ -1,0 +1,40 @@
+# Process Tree: T4-tool-intensive
+# Root processes: 7
+# Total processes in tree: 16
+
+├── 302506:claude
+│   ├── 302554:git
+│   │   ├── 302556:git
+│   │   │   └── 302561:git
+│   │   └── 302562:git
+│   ├── 302555:git
+│   ├── 302557:git
+│   ├── 302564:claude.exe
+│   ├── 302578:sh
+│   │   ├── 302579:ps
+│   │   ├── 302580:grep
+│   │   └── 302581:grep
+│   ├── 302582:claude.exe
+│   ├── 302583:claude.exe
+│   ├── 302720:env
+│   └── 302721:bash
+│       ├── 302722:locale-check
+│       ├── 302725:grep
+│       ├── 302727:grep
+│       ├── 302729:cut
+│       ├── 302730:grep
+│       ├── 302751:head
+│       ├── 302753:grep
+│       ├── 302754:awk
+│       ├── 302755:head
+│       ├── 302757:sed
+│       ├── 302758:sed
+│       ├── 302759:head
+│       ├── 302760:cat
+│       └── 302761:cat
+├── 302734:base64
+├── 302737:base64
+├── 302740:base64
+├── 302743:base64
+├── 302746:base64
+└── 302749:base64

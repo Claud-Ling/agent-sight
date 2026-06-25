@@ -1,0 +1,18 @@
+# Process Tree: T1
+# Root processes: 1
+# Total processes in tree: 8
+
+└── 299217:claude
+    ├── 299236:git
+    │   ├── 299239:git
+    │   │   └── 299243:git
+    │   └── 299244:git
+    ├── 299237:git
+    ├── 299238:git
+    ├── 299247:claude.exe
+    ├── 299262:sh
+    │   ├── 299263:ps
+    │   ├── 299264:grep
+    │   └── 299265:grep
+    ├── 299266:claude.exe
+    └── 299267:claude.exe

@@ -1,0 +1,41 @@
+# Process Tree: T5b-process-model
+# Root processes: 7
+# Total processes in tree: 16
+
+├── 305389:claude
+│   ├── 305418:git
+│   │   ├── 305421:git
+│   │   │   └── 305425:git
+│   │   └── 305426:git
+│   ├── 305419:git
+│   ├── 305420:git
+│   ├── 305430:claude.exe
+│   ├── 305444:sh
+│   │   ├── 305445:ps
+│   │   ├── 305446:grep
+│   │   └── 305447:grep
+│   ├── 305448:claude.exe
+│   ├── 305449:claude.exe
+│   ├── 305716:env
+│   └── 305717:bash
+│       ├── 305718:locale-check
+│       ├── 305720:grep
+│       ├── 305722:grep
+│       ├── 305724:cut
+│       ├── 305725:grep
+│       ├── 305746:head
+│       ├── 305748:grep
+│       ├── 305749:awk
+│       ├── 305750:head
+│       ├── 305752:sed
+│       ├── 305753:sed
+│       ├── 305754:head
+│       ├── 305755:cat
+│       ├── 305756:cat
+│       └── 305757:cat
+├── 305729:base64
+├── 305732:base64
+├── 305735:base64
+├── 305738:base64
+├── 305741:base64
+└── 305744:base64

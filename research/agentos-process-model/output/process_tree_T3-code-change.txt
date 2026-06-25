@@ -1,0 +1,18 @@
+# Process Tree: T3-code-change
+# Root processes: 1
+# Total processes in tree: 8
+
+└── 301748:claude
+    ├── 301769:git
+    │   ├── 301772:git
+    │   │   └── 301777:git
+    │   └── 301778:git
+    ├── 301770:git
+    ├── 301771:git
+    ├── 301781:claude.exe
+    ├── 301795:sh
+    │   ├── 301796:ps
+    │   ├── 301797:grep
+    │   └── 301798:grep
+    ├── 301799:claude.exe
+    └── 301800:claude.exe
