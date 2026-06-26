@@ -13,8 +13,8 @@
 | Session | 任务类型 | 进程数 | curl (LLM代理) | sh (工具代理) | 耗时 | 树深度 | 唯一comm |
 |---------|---------|--------|---------------|-------------|------|--------|---------|
 | T1 | 简单问答（eBPF 解释） | 2 | 1 | 0 | 5.2s | 1 | 2 |
-| T2 | 多文件读取（架构阅读） | 16 | 3 | 2 | 54.2s | 2 | 6 |
-| T3 | 代码修改（添加 --version） | 26 | 6 | 1 | 193.8s | 2 | 9 |
+| T2 | 多文件读取（架构阅读） | 16 | 3 | 2 | 54.2s | 2 | 7 |
+| T3 | 代码修改（添加 --version） | 26 | 6 | 1 | 193.8s | 2 | 7 |
 | T4 | 工具密集（TODO 扫描 + git） | 11 | 2 | 1 | 55.6s | 2 | 6 |
 | T5a | agentOS 基础概念 | 2 | 1 | 0 | 32.1s | 1 | 2 |
 | T5b | 进程模型设计 | 2 | 1 | 0 | 41.6s | 1 | 2 |
@@ -115,11 +115,10 @@ timem-native-rs (唯一 agent 根, 深度 0)
 | grep | 10 | 38.5% | 文本搜索（ACTION） |
 | curl | 6 | 23.1% | LLM API 调用代理（INFRA） |
 | locale-check | 4 | 15.4% | 环境检测——进程指纹（ACTION） |
-| find | 2 | 7.7% | 文件扫描（ACTION） |
+| sed | 3 | 11.5% | 文本替换（ACTION） |
 | timem-native-rs | 1 | 3.8% | 根进程（INFRA） |
 | sh | 1 | 3.8% | 工具执行器——通道（CHANNEL） |
 | cat | 1 | 3.8% | 文件读取（ACTION） |
-| sed | 1 | 3.8% | 文本替换（ACTION） |
 
 跨 session 共享的稳定进程骨架：
 - `timem-native-rs`（7/7）+ `curl`（7/7）= 最小进程形态
@@ -180,14 +179,14 @@ INFRA 与 ACTION 之间有 **4 个数量级**的存活时间差距（curl ~10⁴
 | Session | 最大并发 | 总进程数 | 并发峰值时刻 |
 |---------|---------|---------|------------|
 | T1 | 2 | 2 | timem + curl |
-| T2 | 6 | 16 | sh burst（grep/find 并行） |
-| T3 | 6 | 26 | sh burst（grep/locale-check 并行） |
-| T4 | 5 | 11 | sh burst |
+| T2 | 4 | 16 | sh burst（grep/find 并行） |
+| T3 | 3 | 26 | sh burst（grep/locale-check 并行） |
+| T4 | 3 | 11 | sh burst |
 | T5a | 2 | 2 | timem + curl |
 | T5b | 2 | 2 | timem + curl |
 | T5c | 2 | 3 | timem + curl |
 
-最大并发 6（T2/T3），出现在 sh 工具执行 burst 内。curl 之间严格串行——同一时刻只有 1 个 curl 存活。纯推理 session（T5a/T5b/T5c）并发恒为 2。
+最大并发 4（T2），出现在 sh 工具执行 burst 内。curl 之间严格串行——同一时刻只有 1 个 curl 存活。纯推理 session（T5a/T5b/T5c）并发恒为 2。
 
 ---
 
@@ -334,7 +333,7 @@ T5a（2 进程）、T5b（2 进程）、T5c（3 进程）是纯推理任务—�
 
 ### 回扣三个核心问题
 
-**问题 1：子进程数量/类型/层级。** TimemAi 子进程 2-26 个，**贯穿 session 全程**。进程分类学：INFRA = timem 根（1 个）+ curl（N 个，N = LLM 调用数），ACTION = grep/cat/find/sed/locale-check，CHANNEL = sh。进程树深度恒 2 层、单根。最大并发 6，每轮 sh burst 内并发。
+**问题 1：子进程数量/类型/层级。** TimemAi 子进程 2-26 个，**贯穿 session 全程**。进程分类学：INFRA = timem 根（1 个）+ curl（N 个，N = LLM 调用数），ACTION = grep/cat/find/sed/locale-check，CHANNEL = sh。进程树深度恒 2 层、单根。最大并发 4，每轮 sh burst 内并发。
 
 **问题 2：进程↔LLM 时序关联。** 每个 LLM 调用 = 1 个 curl 子进程（存活 5-60s），每个工具调用 = 1 个 sh + N 个命令子进程（存活 < 100ms）。推理与行动交替的认知循环直接映射为进程创建时序。per-request fork 模型天然对 eBPF 观测友好——每个工作单元 = 一个进程事件。
 
