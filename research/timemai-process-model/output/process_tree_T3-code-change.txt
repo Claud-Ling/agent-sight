@@ -1,43 +1,30 @@
 # Process Tree: T3-code-change
 # Root processes: 1
-# Total processes in tree: 39
+# Total processes in tree: 26
 
-└── 641520:timem-native-rs
-    ├── 641549:curl
-    ├── 641560:sh
-    │   ├── 641561:locale-check
-    │   ├── 641563:grep
-    │   ├── 641565:grep
-    │   └── 641566:ls
-    ├── 641567:curl
-    ├── 641586:curl
-    ├── 641804:sh
-    │   ├── 641805:locale-check
-    │   ├── 641807:grep
-    │   ├── 641809:grep
-    │   ├── 641810:cat
-    │   ├── 641811:find
-    │   ├── 641812:grep
-    │   ├── 641813:grep
-    │   ├── 641814:grep
-    │   └── 641815:head
-    ├── 641816:curl
-    ├── 641963:sh
-    │   ├── 641964:locale-check
-    │   ├── 641966:grep
-    │   ├── 641968:grep
-    │   ├── 641969:find
-    │   ├── 641970:cat
-    │   └── 641971:cat
-    ├── 641972:curl
-    ├── 642140:head
-    │   ├── 642142:locale-check
-    │   ├── 642144:grep
-    │   └── 642146:grep
-    ├── 642147:curl
-    ├── 642248:sed
-    │   ├── 642249:locale-check
-    │   ├── 642251:grep
-    │   ├── 642253:grep
-    │   └── 642254:grep
-    └── 642255:curl
+└── 744458:timem-native-rs
+    ├── 744508:curl
+    ├── 744646:cat
+    │   ├── 744647:locale-check
+    │   ├── 744649:grep
+    │   └── 744651:grep
+    ├── 744652:curl
+    ├── 744887:sed
+    │   ├── 744888:locale-check
+    │   ├── 744890:grep
+    │   └── 744892:grep
+    ├── 744893:curl
+    ├── 744997:curl
+    ├── 745134:sed
+    │   ├── 745135:locale-check
+    │   ├── 745137:grep
+    │   └── 745139:grep
+    ├── 745140:curl
+    ├── 745424:sh
+    │   ├── 745425:locale-check
+    │   ├── 745427:grep
+    │   ├── 745429:grep
+    │   ├── 745430:grep
+    │   ├── 745431:sed
+    │   └── 745432:grep
+    └── 745433:curl

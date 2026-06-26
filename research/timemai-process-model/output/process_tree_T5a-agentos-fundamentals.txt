@@ -1,19 +1,6 @@
 # Process Tree: T5a-agentos-fundamentals
 # Root processes: 1
-# Total processes in tree: 15
+# Total processes in tree: 2
 
-└── 646307:timem-native-rs
-    ├── 646335:curl
-    ├── 646363:sh
-    │   ├── 646364:locale-check
-    │   ├── 646366:grep
-    │   ├── 646368:grep
-    │   ├── 646370:head
-    │   └── 646369:find
-    ├── 646371:curl
-    ├── 646424:cat
-    │   ├── 646425:locale-check
-    │   ├── 646427:grep
-    │   └── 646429:grep
-    ├── 646430:curl
-    └── 646822:curl
+└── 746371:timem-native-rs
+    └── 746399:curl

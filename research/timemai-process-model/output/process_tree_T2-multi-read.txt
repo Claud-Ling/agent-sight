@@ -1,33 +1,20 @@
 # Process Tree: T2-multi-read
 # Root processes: 1
-# Total processes in tree: 29
+# Total processes in tree: 16
 
-└── 640907:timem-native-rs
-    ├── 640936:curl
-    ├── 640973:sh
-    │   ├── 640974:locale-check
-    │   ├── 640976:grep
-    │   ├── 640978:grep
-    │   ├── 640979:find
-    │   └── 640980:head
-    ├── 640981:curl
-    ├── 641011:curl
-    ├── 641055:sh
-    │   ├── 641056:locale-check
-    │   ├── 641058:grep
-    │   ├── 641060:grep
-    │   ├── 641061:find
-    │   ├── 641062:wc
-    │   ├── 641063:find
-    │   └── 641064:head
-    ├── 641065:sh
-    │   ├── 641066:locale-check
-    │   ├── 641068:grep
-    │   ├── 641070:grep
-    │   └── 641071:cat
-    ├── 641072:sh
-    │   ├── 641073:locale-check
-    │   ├── 641075:grep
-    │   ├── 641077:grep
-    │   └── 641078:ls
-    └── 641079:curl
+└── 741544:timem-native-rs
+    ├── 741559:curl
+    ├── 741598:sh
+    │   ├── 741599:locale-check
+    │   ├── 741601:grep
+    │   ├── 741603:grep
+    │   ├── 741604:find
+    │   └── 741605:head
+    ├── 741607:sh
+    │   ├── 741608:locale-check
+    │   ├── 741610:grep
+    │   ├── 741612:grep
+    │   ├── 741613:find
+    │   └── 741614:head
+    ├── 741615:curl
+    └── 741688:curl

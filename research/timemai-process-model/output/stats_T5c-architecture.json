@@ -1,24 +1,24 @@
 {
   "session_info": {
     "schema_note": "no `sessions` table; metadata derived from timestamps",
-    "duration_s": 62.7,
+    "duration_s": 61.3,
     "llm_calls": 0,
-    "process_nodes": 5,
+    "process_nodes": 3,
     "models": []
   },
   "process_tree_stats": {
-    "total_processes": 5,
+    "total_processes": 3,
     "depth_distribution": {
       "0": 1,
-      "1": 4
+      "1": 2
     },
     "max_depth": 1,
     "agent_roots": [
       {
-        "pid": 644405,
+        "pid": 747075,
         "comm": "timem-native-rs",
         "command": "/home/lixiang/EMU/TimemAi/target/release/timem-native-rs",
-        "ppid": 644380
+        "ppid": 747047
       }
     ],
     "agent_root_count": 1,
@@ -28,41 +28,41 @@
     "unreachable_count": 0
   },
   "process_type_distribution": {
-    "total": 5,
+    "total": 3,
     "unique_types": 2,
     "distribution": {
       "curl": {
-        "count": 4,
-        "pct": 80.0
+        "count": 2,
+        "pct": 66.7
       },
       "timem-native-rs": {
         "count": 1,
-        "pct": 20.0
+        "pct": 33.3
       }
     }
   },
   "process_lifetime": {
-    "computable": 5,
-    "min_ms": 4448,
-    "max_ms": 62711,
-    "mean_ms": 25083.0,
-    "p50_ms": 15197,
-    "p95_ms": 62711,
+    "computable": 3,
+    "min_ms": 24155,
+    "max_ms": 61332,
+    "mean_ms": 40855.3,
+    "p50_ms": 37079,
+    "p95_ms": 61332,
     "missing_start": 0,
     "missing_end": 0,
     "missing_both": 0,
-    "total_rows": 5,
+    "total_rows": 3,
     "by_comm": {
       "curl": {
-        "count": 4,
-        "p50_ms": 15197,
-        "max_ms": 34551,
+        "count": 2,
+        "p50_ms": 37079,
+        "max_ms": 37079,
         "role": "INFRA"
       },
       "timem-native-rs": {
         "count": 1,
-        "p50_ms": 62711,
-        "max_ms": 62711,
+        "p50_ms": 61332,
+        "max_ms": 61332,
         "role": "INFRA"
       }
     }
@@ -70,13 +70,13 @@
   "exit_status_distribution": {
     "by_comm": {
       "curl": {
-        "0": 4
+        "0": 2
       },
       "timem-native-rs": {
         "0": 1
       }
     },
-    "exited_count": 5,
+    "exited_count": 3,
     "nonzero_exit_count": 0,
     "nonzero_exits": {},
     "failure_rate_pct": 0.0
@@ -86,11 +86,11 @@
     "warning": "llm_calls table is empty"
   },
   "parent_child_pairs": {
-    "total_pairs": 4,
+    "total_pairs": 2,
     "top_10": [
       {
         "pair": "timem-native-rs → curl",
-        "count": 4
+        "count": 2
       }
     ]
   },
@@ -109,19 +109,19 @@
     "warning": "tool_calls table is empty"
   },
   "resource_profile": {
-    "samples": 32,
+    "samples": 31,
     "comms": {
-      "timem-native-rs": 32
+      "timem-native-rs": 31
     },
     "cpu": {
       "p50": 0.0,
-      "max": 0.0
+      "max": 0.5
     },
     "rss": {
       "first_mb": 16,
-      "last_mb": 17,
-      "max_mb": 17,
-      "delta_mb": 1
+      "last_mb": 16,
+      "max_mb": 16,
+      "delta_mb": 0
     }
   },
   "network_targets": {
@@ -130,26 +130,24 @@
   },
   "concurrency": {
     "max_concurrent": 2,
-    "total_processes": 5
+    "total_processes": 3
   },
   "event_timeline": {
-    "base_ms": 1782440743343,
-    "last_subprocess_exec_offset_ms": 47512,
+    "base_ms": 1782455759091,
+    "last_subprocess_exec_offset_ms": 24205,
     "last_llm_call_offset_ms": null,
     "last_tool_call_offset_ms": null,
-    "session_end_offset_ms": 62711,
-    "post_burst_tail_ms": 15199,
+    "session_end_offset_ms": 61332,
+    "post_burst_tail_ms": 37127,
     "in_process_io_actors": {
       "timem-native-rs": 2
     },
     "file_writes_after_last_subprocess": 1
   },
   "subprocess_vs_inprocess": {
-    "num_process_clusters": 4,
+    "num_process_clusters": 2,
     "cluster_sizes": [
       2,
-      1,
-      1,
       1
     ],
     "total_tool_calls": 0,

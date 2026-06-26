@@ -1,7 +1,6 @@
 # Process Tree: T5b-process-model
 # Root processes: 1
-# Total processes in tree: 3
+# Total processes in tree: 2
 
-└── 647309:timem-native-rs
-    ├── 647337:curl
-    └── 647816:curl
+└── 746680:timem-native-rs
+    └── 746714:curl

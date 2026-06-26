@@ -1,7 +1,7 @@
 {
   "session_info": {
     "schema_note": "no `sessions` table; metadata derived from timestamps",
-    "duration_s": 9.6,
+    "duration_s": 5.2,
     "llm_calls": 0,
     "process_nodes": 2,
     "models": []
@@ -15,10 +15,10 @@
     "max_depth": 1,
     "agent_roots": [
       {
-        "pid": 640614,
+        "pid": 741395,
         "comm": "timem-native-rs",
         "command": "/home/lixiang/EMU/TimemAi/target/release/timem-native-rs",
-        "ppid": 640589
+        "ppid": 741370
       }
     ],
     "agent_root_count": 1,
@@ -43,11 +43,11 @@
   },
   "process_lifetime": {
     "computable": 2,
-    "min_ms": 9563,
-    "max_ms": 9568,
-    "mean_ms": 9565.5,
-    "p50_ms": 9568,
-    "p95_ms": 9568,
+    "min_ms": 5139,
+    "max_ms": 5168,
+    "mean_ms": 5153.5,
+    "p50_ms": 5168,
+    "p95_ms": 5168,
     "missing_start": 0,
     "missing_end": 0,
     "missing_both": 0,
@@ -55,14 +55,14 @@
     "by_comm": {
       "curl": {
         "count": 1,
-        "p50_ms": 9563,
-        "max_ms": 9563,
+        "p50_ms": 5139,
+        "max_ms": 5139,
         "role": "INFRA"
       },
       "timem-native-rs": {
         "count": 1,
-        "p50_ms": 9568,
-        "max_ms": 9568,
+        "p50_ms": 5168,
+        "max_ms": 5168,
         "role": "INFRA"
       }
     }
@@ -109,18 +109,18 @@
     "warning": "tool_calls table is empty"
   },
   "resource_profile": {
-    "samples": 5,
+    "samples": 3,
     "comms": {
-      "timem-native-rs": 5
+      "timem-native-rs": 3
     },
     "cpu": {
       "p50": 0.0,
       "max": 0.0
     },
     "rss": {
-      "first_mb": 16,
-      "last_mb": 16,
-      "max_mb": 16,
+      "first_mb": 17,
+      "last_mb": 17,
+      "max_mb": 17,
       "delta_mb": 0
     }
   },
@@ -133,12 +133,12 @@
     "total_processes": 2
   },
   "event_timeline": {
-    "base_ms": 1782440182233,
+    "base_ms": 1782455137806,
     "last_subprocess_exec_offset_ms": 3,
     "last_llm_call_offset_ms": null,
     "last_tool_call_offset_ms": null,
-    "session_end_offset_ms": 9568,
-    "post_burst_tail_ms": 9565,
+    "session_end_offset_ms": 5168,
+    "post_burst_tail_ms": 5165,
     "in_process_io_actors": {
       "timem-native-rs": 2
     },

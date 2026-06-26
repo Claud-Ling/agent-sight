@@ -2,11 +2,32 @@
 
 > 审计两个实验（agentos-process-model 和 timemai-process-model）在相同测试任务上使用的 prompt 是否一致，以及差异对对比结论的影响评估。
 
-## 审计范围
+## 当前状态：v2 Aligned（2026-06-26, TimemAi v0.5）
 
-- **Claude Code**：7 个 session（T1-T5c），prompt 来自 `audit_events` 表中 `comm='claude'` 的 `exec` 事件的 `full_command` 字段
-- **TimemAi**：7 个 session（T1-T5c），prompt 来自 `/tmp/timem-research-*/` 下 `api_audit.jsonl` 中首次 `llm_request` 的 `User question` 字段
-- T5a/T5b 的 TimemAi v2（复录成功版本）被用于对比
+全部 7 个 session 已使用与 Claude Code **逐字符完全相同**的 prompt 重新录制。
+
+| Session | Prompt 对齐 | TimemAi 版本 | max_tokens | 备注 |
+|---------|-----------|-------------|------------|------|
+| T1 | ✓ 100% | v0.5 | 20480 | — |
+| T2 | ✓ 100% | v0.5 | 20480 | — |
+| T3 | ✓ 100% | v0.5 | 20480 | `--supporting-context` 添加 JSON 格式提示 |
+| T4 | ✓ 100% | v0.5 | 20480 | `--supporting-context` 添加 JSON 格式提示 |
+| T5a | ✓ 100% | v0.5 | 20480 | `--supporting-context` 添加 JSON 格式提示 |
+| T5b | ✓ 100% | v0.5 | 20480 | `--supporting-context` 添加 JSON 格式提示 |
+| T5c | ✓ 100% | v0.5 | 20480 | `--supporting-context` 添加 JSON 格式提示 |
+
+**残余差异**：T5b/T5c 的 CC prompt 引用前序交互上下文（"基于你刚对 agentOS 的分析""总结我们讨论的核心设计原则"），TM 的 `--once-json` 模式无对话历史。这是 `--once-json` 模式的固有差异，不是 prompt 差异。
+
+**`--supporting-context` 说明**：T3/T4/T5 添加了 JSON 格式运行时提示（`IMPORTANT: Your entire response must be a single valid JSON object starting with {...`）。这不修改用户 prompt 文本——它以独立的 prompt delta segment 追加到运行时上下文。功能上等价于 CC 的 system prompt 中的隐式格式约束。DeepSeek v4-pro 在复杂任务中存在 chain-of-thought 泄漏问题（在 JSON 前输出推理文本），此提示是缓解措施。
+
+---
+
+## 审计范围（v1 历史记录）
+
+以下为 v1 实验（TimemAi v0.4, max_tokens=2048）的 prompt 一致性审计。该实验的 prompt 与 CC 存在显著差异，数据已被 v2 取代。保留此记录作为方法学参考。
+
+- **Claude Code**：7 个 session（T1-T5c），prompt 来自 `audit_events` 表中 `comm='claude'` 的 `exec` 事件的 `full_command` 字段；完整 prompt 来自 `llm_calls` 表
+- **TimemAi v1**：7 个 session（T1-T5c），prompt 来自 `/tmp/timem-research-*/` 下 `api_audit.jsonl`
 
 ---
 

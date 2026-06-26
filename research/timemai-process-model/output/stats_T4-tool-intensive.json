@@ -1,113 +1,109 @@
 {
   "session_info": {
     "schema_note": "no `sessions` table; metadata derived from timestamps",
-    "duration_s": 66.5,
+    "duration_s": 55.6,
     "llm_calls": 0,
-    "process_nodes": 18,
+    "process_nodes": 11,
     "models": []
   },
   "process_tree_stats": {
-    "total_processes": 18,
+    "total_processes": 11,
     "depth_distribution": {
       "0": 1,
-      "1": 6,
-      "2": 10
+      "1": 4,
+      "2": 6
     },
     "max_depth": 2,
     "agent_roots": [
       {
-        "pid": 642521,
+        "pid": 745745,
         "comm": "timem-native-rs",
         "command": "/home/lixiang/EMU/TimemAi/target/release/timem-native-rs",
-        "ppid": 642496
+        "ppid": 745720
       }
     ],
     "agent_root_count": 1,
-    "missing_parent_orphans": {
-      "grep": 1
-    },
-    "missing_parent_orphan_count": 1,
-    "unreachable_pids": [
-      642755
-    ],
-    "unreachable_count": 1
+    "missing_parent_orphans": {},
+    "missing_parent_orphan_count": 0,
+    "unreachable_pids": [],
+    "unreachable_count": 0
   },
   "process_type_distribution": {
-    "total": 18,
+    "total": 11,
     "unique_types": 6,
     "distribution": {
       "grep": {
-        "count": 7,
-        "pct": 38.9
+        "count": 4,
+        "pct": 36.4
       },
       "curl": {
-        "count": 3,
-        "pct": 16.7
-      },
-      "sh": {
-        "count": 3,
-        "pct": 16.7
+        "count": 2,
+        "pct": 18.2
       },
       "locale-check": {
-        "count": 3,
-        "pct": 16.7
+        "count": 2,
+        "pct": 18.2
       },
       "timem-native-rs": {
         "count": 1,
-        "pct": 5.6
+        "pct": 9.1
+      },
+      "sh": {
+        "count": 1,
+        "pct": 9.1
       },
       "git": {
         "count": 1,
-        "pct": 5.6
+        "pct": 9.1
       }
     }
   },
   "process_lifetime": {
-    "computable": 18,
-    "min_ms": 0,
-    "max_ms": 66495,
-    "mean_ms": 8218.2,
+    "computable": 11,
+    "min_ms": 1,
+    "max_ms": 55568,
+    "mean_ms": 10090.8,
     "p50_ms": 2,
-    "p95_ms": 66495,
+    "p95_ms": 55568,
     "missing_start": 0,
     "missing_end": 0,
     "missing_both": 0,
-    "total_rows": 18,
+    "total_rows": 11,
     "by_comm": {
       "curl": {
-        "count": 3,
-        "p50_ms": 9591,
-        "max_ms": 33938,
+        "count": 2,
+        "p50_ms": 29372,
+        "max_ms": 29372,
         "role": "INFRA"
       },
       "git": {
         "count": 1,
+        "p50_ms": 16,
+        "max_ms": 16,
+        "role": "ACTION"
+      },
+      "grep": {
+        "count": 4,
         "p50_ms": 2,
         "max_ms": 2,
         "role": "ACTION"
       },
-      "grep": {
-        "count": 7,
-        "p50_ms": 1,
-        "max_ms": 15024,
-        "role": "ACTION"
-      },
       "locale-check": {
-        "count": 3,
-        "p50_ms": 1,
-        "max_ms": 1,
+        "count": 2,
+        "p50_ms": 2,
+        "max_ms": 2,
         "role": "ACTION"
       },
       "sh": {
-        "count": 3,
+        "count": 1,
         "p50_ms": 9,
-        "max_ms": 15035,
+        "max_ms": 9,
         "role": "ACTION"
       },
       "timem-native-rs": {
         "count": 1,
-        "p50_ms": 66495,
-        "max_ms": 66495,
+        "p50_ms": 55568,
+        "max_ms": 55568,
         "role": "INFRA"
       }
     }
@@ -115,57 +111,64 @@
   "exit_status_distribution": {
     "by_comm": {
       "curl": {
-        "0": 3
+        "0": 2
       },
       "git": {
         "0": 1
       },
       "grep": {
-        "1": 6,
-        "0": 1
+        "1": 4
       },
       "locale-check": {
-        "0": 3
+        "0": 2
       },
       "sh": {
-        "0": 3
+        "0": 1
       },
       "timem-native-rs": {
         "0": 1
       }
     },
-    "exited_count": 18,
-    "nonzero_exit_count": 6,
+    "exited_count": 11,
+    "nonzero_exit_count": 4,
     "nonzero_exits": {
-      "grep=1": 6
+      "grep=1": 4
     },
-    "failure_rate_pct": 33.3
+    "failure_rate_pct": 36.4
   },
   "llm_process_correlation": {
     "llm_calls": 0,
     "warning": "llm_calls table is empty"
   },
   "parent_child_pairs": {
-    "total_pairs": 16,
+    "total_pairs": 10,
     "top_10": [
       {
-        "pair": "sh → grep",
-        "count": 6
+        "pair": "timem-native-rs → curl",
+        "count": 2
       },
       {
-        "pair": "timem-native-rs → curl",
-        "count": 3
+        "pair": "sh → grep",
+        "count": 2
+      },
+      {
+        "pair": "git → grep",
+        "count": 2
       },
       {
         "pair": "timem-native-rs → sh",
-        "count": 3
+        "count": 1
       },
       {
         "pair": "sh → locale-check",
-        "count": 3
+        "count": 1
       },
       {
-        "pair": "sh → git",
+        "pair": "timem-native-rs → git",
+        "count": 1
+      },
+      {
+        "pair": "git → locale-check",
         "count": 1
       }
     ]
@@ -185,19 +188,19 @@
     "warning": "tool_calls table is empty"
   },
   "resource_profile": {
-    "samples": 34,
+    "samples": 28,
     "comms": {
-      "timem-native-rs": 34
+      "timem-native-rs": 28
     },
     "cpu": {
       "p50": 0.0,
-      "max": 0.5
+      "max": 1.0
     },
     "rss": {
-      "first_mb": 17,
+      "first_mb": 4,
       "last_mb": 17,
       "max_mb": 17,
-      "delta_mb": 0
+      "delta_mb": 13
     }
   },
   "network_targets": {
@@ -206,29 +209,26 @@
   },
   "concurrency": {
     "max_concurrent": 3,
-    "total_processes": 18
+    "total_processes": 11
   },
   "event_timeline": {
-    "base_ms": 1782440462230,
-    "last_subprocess_exec_offset_ms": 56903,
+    "base_ms": 1782455588936,
+    "last_subprocess_exec_offset_ms": 29523,
     "last_llm_call_offset_ms": null,
     "last_tool_call_offset_ms": null,
-    "session_end_offset_ms": 66495,
-    "post_burst_tail_ms": 9592,
+    "session_end_offset_ms": 55568,
+    "post_burst_tail_ms": 26045,
     "in_process_io_actors": {
-      "sh": 3,
       "timem-native-rs": 2,
-      "git": 1
+      "sh": 2
     },
     "file_writes_after_last_subprocess": 1
   },
   "subprocess_vs_inprocess": {
-    "num_process_clusters": 4,
+    "num_process_clusters": 2,
     "cluster_sizes": [
       2,
-      5,
-      1,
-      10
+      9
     ],
     "total_tool_calls": 0,
     "total_llm_calls": 0,
