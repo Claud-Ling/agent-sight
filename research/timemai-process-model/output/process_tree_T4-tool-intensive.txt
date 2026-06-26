@@ -1,0 +1,22 @@
+# Process Tree: T4-tool-intensive
+# Root processes: 2
+# Total processes in tree: 18
+
+├── 642521:timem-native-rs
+│   ├── 642528:curl
+│   ├── 642749:sh
+│   │   ├── 642750:locale-check
+│   │   ├── 642752:grep
+│   │   └── 642754:grep
+│   ├── 642836:curl
+│   ├── 642885:sh
+│   │   ├── 642886:locale-check
+│   │   ├── 642888:grep
+│   │   └── 642890:grep
+│   ├── 642892:sh
+│   │   ├── 642893:locale-check
+│   │   ├── 642895:grep
+│   │   ├── 642897:grep
+│   │   └── 642898:git
+│   └── 642899:curl
+└── 642755:grep

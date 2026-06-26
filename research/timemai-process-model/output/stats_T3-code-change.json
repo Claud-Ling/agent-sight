@@ -1,0 +1,310 @@
+{
+  "session_info": {
+    "schema_note": "no `sessions` table; metadata derived from timestamps",
+    "duration_s": 158.2,
+    "llm_calls": 0,
+    "process_nodes": 39,
+    "models": []
+  },
+  "process_tree_stats": {
+    "total_processes": 39,
+    "depth_distribution": {
+      "0": 1,
+      "1": 12,
+      "2": 26
+    },
+    "max_depth": 2,
+    "agent_roots": [
+      {
+        "pid": 641520,
+        "comm": "timem-native-rs",
+        "command": "/home/lixiang/EMU/TimemAi/target/release/timem-native-rs",
+        "ppid": 641495
+      }
+    ],
+    "agent_root_count": 1,
+    "missing_parent_orphans": {},
+    "missing_parent_orphan_count": 0,
+    "unreachable_pids": [],
+    "unreachable_count": 0
+  },
+  "process_type_distribution": {
+    "total": 39,
+    "unique_types": 10,
+    "distribution": {
+      "grep": {
+        "count": 14,
+        "pct": 35.9
+      },
+      "curl": {
+        "count": 7,
+        "pct": 17.9
+      },
+      "locale-check": {
+        "count": 5,
+        "pct": 12.8
+      },
+      "sh": {
+        "count": 3,
+        "pct": 7.7
+      },
+      "cat": {
+        "count": 3,
+        "pct": 7.7
+      },
+      "find": {
+        "count": 2,
+        "pct": 5.1
+      },
+      "head": {
+        "count": 2,
+        "pct": 5.1
+      },
+      "timem-native-rs": {
+        "count": 1,
+        "pct": 2.6
+      },
+      "ls": {
+        "count": 1,
+        "pct": 2.6
+      },
+      "sed": {
+        "count": 1,
+        "pct": 2.6
+      }
+    }
+  },
+  "process_lifetime": {
+    "computable": 39,
+    "min_ms": 0,
+    "max_ms": 158207,
+    "mean_ms": 8112.7,
+    "p50_ms": 2,
+    "p95_ms": 37457,
+    "missing_start": 0,
+    "missing_end": 0,
+    "missing_both": 0,
+    "total_rows": 39,
+    "by_comm": {
+      "cat": {
+        "count": 3,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "curl": {
+        "count": 7,
+        "p50_ms": 32600,
+        "max_ms": 37457,
+        "role": "INFRA"
+      },
+      "find": {
+        "count": 2,
+        "p50_ms": 51,
+        "max_ms": 51,
+        "role": "ACTION"
+      },
+      "grep": {
+        "count": 14,
+        "p50_ms": 2,
+        "max_ms": 18,
+        "role": "ACTION"
+      },
+      "head": {
+        "count": 2,
+        "p50_ms": 17,
+        "max_ms": 17,
+        "role": "ACTION"
+      },
+      "locale-check": {
+        "count": 5,
+        "p50_ms": 1,
+        "max_ms": 1,
+        "role": "ACTION"
+      },
+      "ls": {
+        "count": 1,
+        "p50_ms": 2,
+        "max_ms": 2,
+        "role": "ACTION"
+      },
+      "sed": {
+        "count": 1,
+        "p50_ms": 19,
+        "max_ms": 19,
+        "role": "ACTION"
+      },
+      "sh": {
+        "count": 3,
+        "p50_ms": 34,
+        "max_ms": 60,
+        "role": "ACTION"
+      },
+      "timem-native-rs": {
+        "count": 1,
+        "p50_ms": 158207,
+        "max_ms": 158207,
+        "role": "INFRA"
+      }
+    }
+  },
+  "exit_status_distribution": {
+    "by_comm": {
+      "cat": {
+        "0": 3
+      },
+      "curl": {
+        "0": 7
+      },
+      "find": {
+        "0": 2
+      },
+      "grep": {
+        "1": 13,
+        "0": 1
+      },
+      "head": {
+        "0": 2
+      },
+      "locale-check": {
+        "0": 5
+      },
+      "ls": {
+        "0": 1
+      },
+      "sed": {
+        "0": 1
+      },
+      "sh": {
+        "0": 3
+      },
+      "timem-native-rs": {
+        "0": 1
+      }
+    },
+    "exited_count": 39,
+    "nonzero_exit_count": 13,
+    "nonzero_exits": {
+      "grep=1": 13
+    },
+    "failure_rate_pct": 33.3
+  },
+  "llm_process_correlation": {
+    "llm_calls": 0,
+    "warning": "llm_calls table is empty"
+  },
+  "parent_child_pairs": {
+    "total_pairs": 38,
+    "top_10": [
+      {
+        "pair": "sh → grep",
+        "count": 9
+      },
+      {
+        "pair": "timem-native-rs → curl",
+        "count": 7
+      },
+      {
+        "pair": "timem-native-rs → sh",
+        "count": 3
+      },
+      {
+        "pair": "sh → locale-check",
+        "count": 3
+      },
+      {
+        "pair": "sh → cat",
+        "count": 3
+      },
+      {
+        "pair": "sed → grep",
+        "count": 3
+      },
+      {
+        "pair": "sh → find",
+        "count": 2
+      },
+      {
+        "pair": "head → grep",
+        "count": 2
+      },
+      {
+        "pair": "sh → ls",
+        "count": 1
+      },
+      {
+        "pair": "sh → head",
+        "count": 1
+      }
+    ]
+  },
+  "startup_vs_action": {
+    "warning": "no LLM calls"
+  },
+  "action_bursts": {
+    "warning": "no LLM calls"
+  },
+  "token_flow": {
+    "token_records": 0,
+    "warning": "token_usage table is empty"
+  },
+  "tool_analysis": {
+    "tool_calls": 0,
+    "warning": "tool_calls table is empty"
+  },
+  "resource_profile": {
+    "samples": 80,
+    "comms": {
+      "timem-native-rs": 80
+    },
+    "cpu": {
+      "p50": 0.0,
+      "max": 0.5
+    },
+    "rss": {
+      "first_mb": 16,
+      "last_mb": 17,
+      "max_mb": 17,
+      "delta_mb": 1
+    }
+  },
+  "network_targets": {
+    "targets": 0,
+    "warning": "network_targets table is empty"
+  },
+  "concurrency": {
+    "max_concurrent": 7,
+    "total_processes": 39
+  },
+  "event_timeline": {
+    "base_ms": 1782440290117,
+    "last_subprocess_exec_offset_ms": 121970,
+    "last_llm_call_offset_ms": null,
+    "last_tool_call_offset_ms": null,
+    "session_end_offset_ms": 158207,
+    "post_burst_tail_ms": 36237,
+    "in_process_io_actors": {
+      "sh": 5,
+      "timem-native-rs": 2
+    },
+    "file_writes_after_last_subprocess": 1
+  },
+  "subprocess_vs_inprocess": {
+    "num_process_clusters": 7,
+    "cluster_sizes": [
+      2,
+      6,
+      1,
+      11,
+      8,
+      5,
+      6
+    ],
+    "total_tool_calls": 0,
+    "total_llm_calls": 0,
+    "tool_calls_after_last_cluster": 0,
+    "llm_calls_after_last_cluster": 0,
+    "subprocesses_after_last_cluster": 0,
+    "interpretation": "subprocesses continue past the burst"
+  }
+}

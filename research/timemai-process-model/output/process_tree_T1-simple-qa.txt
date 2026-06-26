@@ -1,0 +1,6 @@
+# Process Tree: T1-simple-qa
+# Root processes: 1
+# Total processes in tree: 2
+
+└── 640614:timem-native-rs
+    └── 640648:curl

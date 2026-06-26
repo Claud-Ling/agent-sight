@@ -1,0 +1,10 @@
+digraph process_tree {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname=monospace];
+  edge [fontname=monospace, fontsize=10];
+  647309 [label="647309\ntimem-native-rs" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  647337 [label="647337\ncurl" fillcolor="#56B6C2" style="filled,rounded" fontcolor="white"];
+  647309 -> 647337;
+  647816 [label="647816\ncurl" fillcolor="#56B6C2" style="filled,rounded" fontcolor="white"];
+  647309 -> 647816;
+}

@@ -1,0 +1,34 @@
+digraph process_tree {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname=monospace];
+  edge [fontname=monospace, fontsize=10];
+  646307 [label="646307\ntimem-native-rs" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  646335 [label="646335\ncurl" fillcolor="#56B6C2" style="filled,rounded" fontcolor="white"];
+  646307 -> 646335;
+  646363 [label="646363\nsh" fillcolor="#E5C07B" style="filled,rounded" fontcolor="white"];
+  646364 [label="646364\nlocale-check" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  646363 -> 646364;
+  646366 [label="646366\ngrep" fillcolor="#98C379" style="filled,rounded" fontcolor="white"];
+  646363 -> 646366;
+  646368 [label="646368\ngrep" fillcolor="#98C379" style="filled,rounded" fontcolor="white"];
+  646363 -> 646368;
+  646370 [label="646370\nhead" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  646363 -> 646370;
+  646369 [label="646369\nfind" fillcolor="#61AFEF" style="filled,rounded" fontcolor="white"];
+  646363 -> 646369;
+  646307 -> 646363;
+  646371 [label="646371\ncurl" fillcolor="#56B6C2" style="filled,rounded" fontcolor="white"];
+  646307 -> 646371;
+  646424 [label="646424\ncat" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  646425 [label="646425\nlocale-check" fillcolor="#ABB2BF" style="filled,rounded" fontcolor="white"];
+  646424 -> 646425;
+  646427 [label="646427\ngrep" fillcolor="#98C379" style="filled,rounded" fontcolor="white"];
+  646424 -> 646427;
+  646429 [label="646429\ngrep" fillcolor="#98C379" style="filled,rounded" fontcolor="white"];
+  646424 -> 646429;
+  646307 -> 646424;
+  646430 [label="646430\ncurl" fillcolor="#56B6C2" style="filled,rounded" fontcolor="white"];
+  646307 -> 646430;
+  646822 [label="646822\ncurl" fillcolor="#56B6C2" style="filled,rounded" fontcolor="white"];
+  646307 -> 646822;
+}

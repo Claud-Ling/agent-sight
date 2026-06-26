@@ -162,10 +162,13 @@ def main(db_path: str, label: str, output_dir: str):
     txt_path = f"{output_dir}/process_tree_{label}.txt"
     dot_path = f"{output_dir}/process_tree_{label}.dot"
 
+    def count_tree(node):
+        return 1 + sum(count_tree(c) for c in node.get("children", []))
+
     with open(txt_path, "w") as f:
         f.write(f"# Process Tree: {label}\n")
         f.write(f"# Root processes: {len(roots)}\n")
-        f.write(f"# Total processes in tree: {sum(len(r.get('children', [])) + 1 for r in roots)}\n\n")
+        f.write(f"# Total processes in tree: {sum(count_tree(r) for r in roots)}\n\n")
         f.write(ascii_text)
         f.write("\n")
 

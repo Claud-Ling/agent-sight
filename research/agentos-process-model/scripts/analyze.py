@@ -93,11 +93,12 @@ def process_tree_stats(db: sqlite3.Connection) -> dict:
     pids = {r["pid"] for r in rows}
 
     # Classify every node whose ppid is not in the captured set.
-    #   - the agent root (comm == claude) has a genuinely external ppid (the
-    #     recorder / shell that launched it)
-    #   - everything else (e.g. base64) is a MISSING-PARENT orphan: its ppid
-    #     points at an unobserved intermediate that exited inside the eBPF
-    #     race window. These are NOT additional roots of the agent tree.
+    #   - agent roots: processes whose name implies they are the main agent
+    #     binary (claude, timem-native-rs, etc.) with an external ppid
+    #   - everything else is a MISSING-PARENT orphan: its ppid points at an
+    #     unobserved intermediate that exited inside the eBPF race window.
+    #     These are NOT additional roots of the agent tree.
+    AGENT_ROOT_COMMS = {"claude", "timem-native-rs", "node", "python", "python3"}
     root_candidates = []
     missing_parent_orphans = []
     for r in rows:
@@ -106,17 +107,21 @@ def process_tree_stats(db: sqlite3.Connection) -> dict:
                 "pid": r["pid"], "comm": r["comm"],
                 "command": r["command"], "ppid": r["ppid"],
             }
-            if r["comm"] == "claude":
+            if r["comm"] in AGENT_ROOT_COMMS:
                 root_candidates.append(entry)
             else:
                 missing_parent_orphans.append(entry)
 
     # Depth is computed from the agent root(s) only.
     seed = root_candidates if root_candidates else (
-        # degenerate fallback: if no claude root captured, use all orphans
-        [{"pid": r["pid"], "comm": r["comm"], "command": r["command"],
-          "ppid": r["ppid"]} for r in rows
-         if r["ppid"] is None or r["ppid"] not in pids]
+        # No known agent root captured — fallback: the orphan with the
+        # earliest start time is almost certainly the agent main process
+        list(sorted(
+            [{"pid": r["pid"], "comm": r["comm"], "command": r["command"],
+              "ppid": r["ppid"], "start_timestamp_ms": r["start_timestamp_ms"]} for r in rows
+             if r["ppid"] is None or r["ppid"] not in pids],
+            key=lambda r: r.get("start_timestamp_ms") or 0
+        )[:1])
     )
 
     parent_to_children = defaultdict(list)

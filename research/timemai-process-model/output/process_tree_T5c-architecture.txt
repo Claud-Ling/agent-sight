@@ -1,0 +1,9 @@
+# Process Tree: T5c-architecture
+# Root processes: 1
+# Total processes in tree: 5
+
+└── 644405:timem-native-rs
+    ├── 644432:curl
+    ├── 644462:curl
+    ├── 645353:curl
+    └── 645595:curl

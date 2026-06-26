@@ -1,0 +1,43 @@
+# Process Tree: T3-code-change
+# Root processes: 1
+# Total processes in tree: 39
+
+└── 641520:timem-native-rs
+    ├── 641549:curl
+    ├── 641560:sh
+    │   ├── 641561:locale-check
+    │   ├── 641563:grep
+    │   ├── 641565:grep
+    │   └── 641566:ls
+    ├── 641567:curl
+    ├── 641586:curl
+    ├── 641804:sh
+    │   ├── 641805:locale-check
+    │   ├── 641807:grep
+    │   ├── 641809:grep
+    │   ├── 641810:cat
+    │   ├── 641811:find
+    │   ├── 641812:grep
+    │   ├── 641813:grep
+    │   ├── 641814:grep
+    │   └── 641815:head
+    ├── 641816:curl
+    ├── 641963:sh
+    │   ├── 641964:locale-check
+    │   ├── 641966:grep
+    │   ├── 641968:grep
+    │   ├── 641969:find
+    │   ├── 641970:cat
+    │   └── 641971:cat
+    ├── 641972:curl
+    ├── 642140:head
+    │   ├── 642142:locale-check
+    │   ├── 642144:grep
+    │   └── 642146:grep
+    ├── 642147:curl
+    ├── 642248:sed
+    │   ├── 642249:locale-check
+    │   ├── 642251:grep
+    │   ├── 642253:grep
+    │   └── 642254:grep
+    └── 642255:curl

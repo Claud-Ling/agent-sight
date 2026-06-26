@@ -1,0 +1,122 @@
+[
+  {
+    "session": "T1-simple-qa",
+    "dur_s": 9.6,
+    "n_procs": 2,
+    "n_curl": 1,
+    "n_sh": 0,
+    "unique_comms": 2,
+    "comms": {
+      "timem-native-rs": 1,
+      "curl": 1
+    },
+    "max_depth": 1,
+    "p50_lifetime_ms": 9568
+  },
+  {
+    "session": "T2-multi-read",
+    "dur_s": 65.1,
+    "n_procs": 29,
+    "n_curl": 4,
+    "n_sh": 4,
+    "unique_comms": 10,
+    "comms": {
+      "grep": 8,
+      "curl": 4,
+      "sh": 4,
+      "locale-check": 4,
+      "find": 3,
+      "head": 2,
+      "timem-native-rs": 1,
+      "wc": 1
+    },
+    "max_depth": 2,
+    "p50_lifetime_ms": 2
+  },
+  {
+    "session": "T3-code-change",
+    "dur_s": 158.2,
+    "n_procs": 39,
+    "n_curl": 7,
+    "n_sh": 3,
+    "unique_comms": 10,
+    "comms": {
+      "grep": 14,
+      "curl": 7,
+      "locale-check": 5,
+      "sh": 3,
+      "cat": 3,
+      "find": 2,
+      "head": 2,
+      "timem-native-rs": 1
+    },
+    "max_depth": 2,
+    "p50_lifetime_ms": 2
+  },
+  {
+    "session": "T4-tool-intensive",
+    "dur_s": 66.5,
+    "n_procs": 18,
+    "n_curl": 3,
+    "n_sh": 3,
+    "unique_comms": 6,
+    "comms": {
+      "grep": 7,
+      "curl": 3,
+      "sh": 3,
+      "locale-check": 3,
+      "timem-native-rs": 1,
+      "git": 1
+    },
+    "max_depth": 2,
+    "p50_lifetime_ms": 2
+  },
+  {
+    "session": "T5a-agentos-fundamentals",
+    "dur_s": 89.9,
+    "n_procs": 15,
+    "n_curl": 4,
+    "n_sh": 1,
+    "unique_comms": 8,
+    "comms": {
+      "curl": 4,
+      "grep": 4,
+      "locale-check": 2,
+      "timem-native-rs": 1,
+      "sh": 1,
+      "head": 1,
+      "find": 1,
+      "cat": 1
+    },
+    "max_depth": 2,
+    "p50_lifetime_ms": 3
+  },
+  {
+    "session": "T5b-process-model",
+    "dur_s": 72.0,
+    "n_procs": 3,
+    "n_curl": 2,
+    "n_sh": 0,
+    "unique_comms": 2,
+    "comms": {
+      "curl": 2,
+      "timem-native-rs": 1
+    },
+    "max_depth": 1,
+    "p50_lifetime_ms": 38499
+  },
+  {
+    "session": "T5c-architecture",
+    "dur_s": 62.7,
+    "n_procs": 5,
+    "n_curl": 4,
+    "n_sh": 0,
+    "unique_comms": 2,
+    "comms": {
+      "curl": 4,
+      "timem-native-rs": 1
+    },
+    "max_depth": 1,
+    "p50_lifetime_ms": 15197
+  }
+]

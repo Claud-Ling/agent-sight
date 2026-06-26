@@ -1,0 +1,160 @@
+{
+  "session_info": {
+    "schema_note": "no `sessions` table; metadata derived from timestamps",
+    "duration_s": 72.0,
+    "llm_calls": 0,
+    "process_nodes": 3,
+    "models": []
+  },
+  "process_tree_stats": {
+    "total_processes": 3,
+    "depth_distribution": {
+      "0": 1,
+      "1": 2
+    },
+    "max_depth": 1,
+    "agent_roots": [
+      {
+        "pid": 647309,
+        "comm": "timem-native-rs",
+        "command": "/home/lixiang/EMU/TimemAi/target/release/timem-native-rs",
+        "ppid": 647283
+      }
+    ],
+    "agent_root_count": 1,
+    "missing_parent_orphans": {},
+    "missing_parent_orphan_count": 0,
+    "unreachable_pids": [],
+    "unreachable_count": 0
+  },
+  "process_type_distribution": {
+    "total": 3,
+    "unique_types": 2,
+    "distribution": {
+      "curl": {
+        "count": 2,
+        "pct": 66.7
+      },
+      "timem-native-rs": {
+        "count": 1,
+        "pct": 33.3
+      }
+    }
+  },
+  "process_lifetime": {
+    "computable": 3,
+    "min_ms": 33527,
+    "max_ms": 72030,
+    "mean_ms": 48018.7,
+    "p50_ms": 38499,
+    "p95_ms": 72030,
+    "missing_start": 0,
+    "missing_end": 0,
+    "missing_both": 0,
+    "total_rows": 3,
+    "by_comm": {
+      "curl": {
+        "count": 2,
+        "p50_ms": 38499,
+        "max_ms": 38499,
+        "role": "INFRA"
+      },
+      "timem-native-rs": {
+        "count": 1,
+        "p50_ms": 72030,
+        "max_ms": 72030,
+        "role": "INFRA"
+      }
+    }
+  },
+  "exit_status_distribution": {
+    "by_comm": {
+      "curl": {
+        "0": 2
+      },
+      "timem-native-rs": {
+        "0": 1
+      }
+    },
+    "exited_count": 3,
+    "nonzero_exit_count": 0,
+    "nonzero_exits": {},
+    "failure_rate_pct": 0.0
+  },
+  "llm_process_correlation": {
+    "llm_calls": 0,
+    "warning": "llm_calls table is empty"
+  },
+  "parent_child_pairs": {
+    "total_pairs": 2,
+    "top_10": [
+      {
+        "pair": "timem-native-rs → curl",
+        "count": 2
+      }
+    ]
+  },
+  "startup_vs_action": {
+    "warning": "no LLM calls"
+  },
+  "action_bursts": {
+    "warning": "no LLM calls"
+  },
+  "token_flow": {
+    "token_records": 0,
+    "warning": "token_usage table is empty"
+  },
+  "tool_analysis": {
+    "tool_calls": 0,
+    "warning": "tool_calls table is empty"
+  },
+  "resource_profile": {
+    "samples": 37,
+    "comms": {
+      "timem-native-rs": 37
+    },
+    "cpu": {
+      "p50": 0.0,
+      "max": 0.0
+    },
+    "rss": {
+      "first_mb": 16,
+      "last_mb": 17,
+      "max_mb": 17,
+      "delta_mb": 1
+    }
+  },
+  "network_targets": {
+    "targets": 0,
+    "warning": "network_targets table is empty"
+  },
+  "concurrency": {
+    "max_concurrent": 2,
+    "total_processes": 3
+  },
+  "event_timeline": {
+    "base_ms": 1782440931443,
+    "last_subprocess_exec_offset_ms": 38502,
+    "last_llm_call_offset_ms": null,
+    "last_tool_call_offset_ms": null,
+    "session_end_offset_ms": 72030,
+    "post_burst_tail_ms": 33528,
+    "in_process_io_actors": {
+      "timem-native-rs": 2
+    },
+    "file_writes_after_last_subprocess": 1
+  },
+  "subprocess_vs_inprocess": {
+    "num_process_clusters": 2,
+    "cluster_sizes": [
+      2,
+      1
+    ],
+    "total_tool_calls": 0,
+    "total_llm_calls": 0,
+    "tool_calls_after_last_cluster": 0,
+    "llm_calls_after_last_cluster": 0,
+    "subprocesses_after_last_cluster": 0,
+    "interpretation": "subprocesses continue past the burst"
+  }
+}
